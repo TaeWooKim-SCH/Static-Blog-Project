@@ -1,8 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+/* @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css); */
 
 * {
-  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  /* font-family: 'Spoqa Han Sans Neo', 'sans-serif'; */
+  color: #242424;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(247, 247, 247);
+}
+
+::selection {
+  background-color: rgb(206, 206, 206);
 }
