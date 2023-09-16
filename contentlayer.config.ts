@@ -3,6 +3,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import GithubSlugger from "github-slugger"
 
 /** @type {import ('contentlayer/source-files').ComputedFields} */
 const computedFields: any = {
@@ -18,6 +19,25 @@ const computedFields: any = {
     type: 'number',
     resolve: (post: any) => post.body.raw.split(/\s+/gu).length,
   },
+  headings: {
+    type: "json",
+    resolve: async (doc: any) => {
+      const regXHeader = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
+      const slugger = new GithubSlugger()
+      const headings = Array.from(doc.body.raw.matchAll(regXHeader)).map(
+          ({ groups }: any) => {
+            const flag = groups?.flag;
+            const content = groups?.content;
+            return {
+              level: flag.length,
+              text: content,
+              slug: content ? slugger.slug(content) : undefined
+            };
+          }
+        );
+        return headings;
+      },
+  }
 };
 
 export const Post = defineDocumentType(() => ({
@@ -37,7 +57,7 @@ export const Post = defineDocumentType(() => ({
       type: 'date',
       required: true
     },
-    tag: {
+    tags: {
       type: 'list',
       required: false,
       of: {type: 'string'}
@@ -56,10 +76,7 @@ export default makeSource({
       [
         rehypePrettyCode,
         {
-          theme: {
-            light: 'github-light',
-            dark: 'github-dark'
-          },
+          theme: 'github-dark',
           onVisitLine(node: any) {
             if (node.children.length === 0) {
               node.children = [{type: 'text', value: ''}]

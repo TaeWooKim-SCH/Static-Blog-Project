@@ -8,6 +8,7 @@ export default function Home() {
     <Layout>
       <main>
         <section>
+          <h1>태우</h1>
           <Title>taewoo</Title>
           <div className="mb-4 text-[1.1rem]">
             <span className="text-[#555555]">Hello, I{"'"}m </span>

@@ -16,6 +16,7 @@
     "contentlayer": "^0.3.4",
     "eslint": "8.49.0",
     "eslint-config-next": "13.4.19",
+    "github-slugger": "^2.0.0",
     "next": "13.4.19",
     "next-contentlayer": "^0.3.4",
     "postcss": "8.4.29",
@@ -28,5 +29,8 @@
     "remark-gfm": "^3.0.1",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10"
   }
 }
