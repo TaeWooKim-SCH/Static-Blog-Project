@@ -16,7 +16,7 @@ interface PageProps {
   }
 }
 
-async function getDocFromParams(slug: any) {
+function getDocFromParams(slug: any) {
   const doc = allPosts.find((post) => (
     post.slug.split('/').slice(2).join('/') === slug.join('/')
   ));
@@ -28,8 +28,8 @@ async function getDocFromParams(slug: any) {
   return doc;
 }
 
-export default async function DetailPage({ params }: PageProps) {
-  const doc = await getDocFromParams(params.slug);
+export default function DetailPage({ params }: PageProps) {
+  const doc = getDocFromParams(params.slug);
 
   return (
     <Layout>
