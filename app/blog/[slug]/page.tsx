@@ -43,7 +43,9 @@ export default async function SeriesPage({ params }: PageProps) {
             <div className="p-10">
               <div className="relative mx-auto h-[336px] w-[240px] select-none rounded-lg bg-neutral-200 px-11 pb-16 pt-12">
                 <div className="absolute inset-y-0 left-4 w-[1px] bg-neutral-50"></div>
-                <div className="flex h-full break-keep bg-neutral-50 px-3 py-4 text-xl font-semibold">{postsData.seriesInfo.title}</div>
+                <div className="flex h-full break-keep bg-neutral-50 px-3 py-4 text-xl font-semibold">
+                  {postsData.seriesInfo.title ? postsData.seriesInfo.title : '제목없음'}
+                </div>
               </div>
             </div>
             <div className="col-span-2">
