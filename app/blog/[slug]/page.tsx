@@ -11,6 +11,10 @@ interface PageProps {
   }
 }
 
+export function generateStaticParams() {
+  return [{slug: ['darkmode', 'executionContext, index, promise, prototype, nextblog']}];
+}
+
 async function getSeriesPost(slug: string) {
   let seriesInfo: any;
   const posts = allPosts
@@ -34,7 +38,7 @@ async function getSeriesPost(slug: string) {
 
 export default async function SeriesPage({ params }: PageProps) {
   const postsData = await getSeriesPost(params.slug);
-
+  console.log(params);
   return (
     <Layout>
       <main className="relative pb-16">

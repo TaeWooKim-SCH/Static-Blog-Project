@@ -4,6 +4,10 @@ import SubTitle from "../conponents/common/SubTitle";
 import PostListItem from "../conponents/common/PostListItem";
 import {  filteredBlogPost, filteredSeriesBook } from "../libs/dataset";
 
+export function generateStaticParams() {
+  return [{slug: ['javascript', 'nextjs']}];
+}
+
 export default async function Blog() {
   return (
     <Layout>

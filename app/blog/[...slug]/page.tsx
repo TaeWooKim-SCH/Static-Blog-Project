@@ -36,6 +36,7 @@ async function getDocFromParams(slug: any) {
 
 export default async function DetailPage({ params }: PageProps) {
   const doc = await getDocFromParams(params.slug);
+  console.log(params);
 
   return (
     <Layout>
