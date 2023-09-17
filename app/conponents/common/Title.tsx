@@ -1,5 +1,3 @@
-'use client'
-
 export default function Title({ children, className, ...props }: React.ComponentProps<'h1'>) {
   return (
     <h1

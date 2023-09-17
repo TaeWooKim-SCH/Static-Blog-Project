@@ -6,12 +6,12 @@ import Layout from "./conponents/layouts/Layout"
 
 export default function Home() {
   const unsplashImgList = [
-    '/blog/sample/sample-1.jpg',
-    '/blog/sample/sample-2.jpg',
-    '/blog/sample/sample-3.jpg',
-    '/blog/sample/sample-4.jpg',
-    '/blog/sample/sample-5.jpg',
-    '/blog/sample/sample-6.jpg',
+    '/blogImgs/sample/sample-1.jpg',
+    '/blogImgs/sample/sample-2.jpg',
+    '/blogImgs/sample/sample-3.jpg',
+    '/blogImgs/sample/sample-4.jpg',
+    '/blogImgs/sample/sample-5.jpg',
+    '/blogImgs/sample/sample-6.jpg',
   ];
 
   return (

@@ -1,8 +1,14 @@
-'use client'
-
+import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
 import { AiOutlineCalendar } from 'react-icons/ai';
 
+// import { allPosts } from 'contentlayer/generated';
+
+// const Layout = dynamic(import('@/app/conponents/layouts/Layout'));
+// const Mdx = dynamic(import('../../conponents/common/Mdx'));
+// const Hr = dynamic(import('@/app/conponents/common/Hr'));
+// const TocBanner = dynamic(import('@/app/conponents/common/TocBanner'));
+// const Title = dynamic(import('@/app/conponents/common/Title'));
 import Layout from '@/app/conponents/layouts/Layout';
 import Mdx from '../../conponents/common/Mdx';
 import { allPosts } from 'contentlayer/generated';
@@ -16,7 +22,7 @@ interface PageProps {
   }
 }
 
-function getDocFromParams(slug: any) {
+async function getDocFromParams(slug: any) {
   const doc = allPosts.find((post) => (
     post.slug.split('/').slice(2).join('/') === slug.join('/')
   ));
@@ -28,8 +34,8 @@ function getDocFromParams(slug: any) {
   return doc;
 }
 
-export default function DetailPage({ params }: PageProps) {
-  const doc = getDocFromParams(params.slug);
+export default async function DetailPage({ params }: PageProps) {
+  const doc = await getDocFromParams(params.slug);
 
   return (
     <Layout>
