@@ -11,10 +11,6 @@ interface PageProps {
   }
 }
 
-export function generateStaticParams() {
-  return [{slug: ['darkmode', 'executionContext, index, promise, prototype, nextblog']}];
-}
-
 async function getSeriesPost(slug: string) {
   let seriesInfo: any;
   const posts = allPosts
