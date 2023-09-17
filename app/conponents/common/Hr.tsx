@@ -1,3 +1,5 @@
+'use client'
+
 export default function Hr({className, ...props}: React.ComponentProps<'hr'>) {
   return (
     <hr
