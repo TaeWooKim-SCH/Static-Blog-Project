@@ -4,7 +4,7 @@ import SubTitle from "./conponents/common/SubTitle"
 import Title from "./conponents/common/Title"
 import Layout from "./conponents/layouts/Layout"
 
-export default function Home() {
+export default async function Home() {
   const unsplashImgList = [
     '/blogImgs/sample/sample-1.jpg',
     '/blogImgs/sample/sample-2.jpg',
@@ -55,7 +55,7 @@ export default function Home() {
               date="2023.09.17"
             />
             <PostItem
-              href="/blog/javascript/nextblog"
+              href="/blog/nextjs/nextblog"
               imgUrl={unsplashImgList[3]}
               title="Next 13버전으로 블로그 만들기"
               date="2023.09.16"

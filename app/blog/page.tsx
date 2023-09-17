@@ -4,7 +4,7 @@ import SubTitle from "../conponents/common/SubTitle";
 import PostListItem from "../conponents/common/PostListItem";
 import {  filteredBlogPost, filteredSeriesBook } from "../libs/dataset";
 
-export default function Blog() {
+export default async function Blog() {
   return (
     <Layout>
       <Title>Blog</Title>
