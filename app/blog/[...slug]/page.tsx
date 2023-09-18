@@ -46,10 +46,10 @@ export default async function DetailPage({ params }: PageProps) {
         </div>
       </div>
       <Hr className="mb-14" />
-      <div className="flex">
+      <div className="flex relative gap-8 w-full">
         <Mdx data={doc.body.code} />
         <div className="ml-auto">
-          <div className="sticky top-[120px]">
+          <div className="sticky top-[120px] min-w-[240px] max-w-[260px]">
             <TocBanner headings={doc.headings} />
           </div>
         </div>

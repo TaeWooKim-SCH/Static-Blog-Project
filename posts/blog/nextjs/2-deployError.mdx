@@ -1,0 +1,68 @@
+---
+title: 'Vercel 배포 후 서버 에러처리'
+description: '배포 전 build까진 모두 되는데 배포 후 페이지 렌더 에러 발생을 해결해봅시다'
+date: '2023.09.18'
+tags :
+  - vercel
+  - next.js
+  - ssg
+---
+
+- 먼저 이 글은 vscode에서 npm run build 후 빌드 환경에서 문제가 없었음을 가정합니다.
+
+## Vercel 배포후 갑자기 안뜨던 에러가 떴다!!!!
+분명 vscode에서 npm run build 후 npm run start로 빌드 환경에서 문제가 없었지만 Vercel로 배포 후에 문제가 생겼습니다. <br/>
+첫 페이지는 문제가 없었으나 동적 라우팅해준 페이지로 들어가게 되면 server-side-render 에러 또는 client-side-render 에러가 발생하였습니다. <br/>
+
+### Vercel Log를 확인하자
+그렇다면 문제는 배포과정 또는 배포 후에 발생했다는 것이기 때문에 먼저 Vercel Log를 확인했습니다. <br/>
+로그를 확인해보니 배포과정에서도 문제가 없었습니다. <br/>
+그래서 배포 후 실시간 로그를 더 자세히 확인했습니다. 자세히 보니 동적 라우팅해준 경로로 접근할 때 문제가 발생했었습니다. <br/>
+분명 /blog/javascript/promise로 들어갔지만 페이지를 /blog/[slug]에 있는 페이지로 인식을 하고 있다는 것을 발견했습니다. <br/>
+이 말은 즉 Vercel 배포환경에서 동적 라우팅을 제대로 인식하지 못하고 있는 것이었습니다. <br/>
+그래서 동적이 아닌 정적으로 라우팅을 받아들이도록 하는 방법을 생각했습니다. <br/>
+그 방법은 SSG(Static Site Generation)를 이용하는 것이었습니다. <br/>
+
+### SSG란?
+> 개발자가 빌드 시 사전생성페이지(pre-render page)를 만들어 static 페이지로 가지고 있게 됩니다.
+클라이언트에서 페이지 요청 시 사전생성페이지를 로드하여 보여 줍니다.
+페이지를 사전 생성하여 가지고 있기 때문에 클라이언트 요청에 대한 응답이 빠릅니다.
+빌드할 때 페이지가 생성되므로 변경사항이 생기게 되었을 때는 next.js의 특정 함수를 활용하여 변경사항을 읽은 다음 페이지를 생성 합니다.
+이 SSG를 이용하면 빌드할 때 페이지가 생성되기 때문에 동적 라우팅 경로를 확실히 인식할 거 같다는 생각이 들었습니다.
+
+## Next.js 프로젝트에 SSG 설정하기(Next.js 13버전)
+먼저 Next.js 13버전에서는 SSG를 설정할 때 동적 라우팅이 된 페이지에 generateStaticParams라는 함수를 정의하여 설정합니다.
+
+### [slug]일 때
+```ts
+// blog/[slug]/page.tsx
+export async function generateStaticParams() {
+  // AllSeriesName = ['javascript', 'nextjs']
+  return AllSeriesName.map((name) => ({slug: name}));
+}
+```
+[slug]일 때에는 generateStaticParams 함수의 리턴 형식이 배열 안에 객체 안에 파라미터 명을 속성명으로 넣고 이 속성명의 value로 동적 라우팅 경로 명에 올 문자열을 넣어주면 됩니다. <br/>
+즉, ```[{slug: 'javascript'}, {slug: 'nextjs'}]```이런식으로 만들어 줘야 하는 것입니다.
+
+
+### [...slug]일 때
+[...slug]일 때가 조금은 복잡할 수 있습니다. <br/>
+[...slug]는 경로명이 예시로 /blog/javascript/promise, /blog/nextjs/1-nextblog 등이 될 수 있습니다.
+```ts
+// /blog/[...slug]/page.tsx
+export async function generateStaticParams() {
+  // filteredBlogPost는 contentlayer의 반환된 객체입니다.
+  // post.slug는 /blog/javascript/promise 형식으로 되어 있습니다.
+  return filteredBlogPost.map((post) => ({
+    slug: post.slug.split('/').slice(2)
+  }));
+}
+```
+[...slug]일 때에는 generateStaticParams 함수의 리턴 형식이 배열 안에 객체 안에 파라미터 명을 속성명으로 넣고 이 속성명의 value로 문자열 배열을 경로 순서대로 넣어주면 됩니다. <br/>
+즉, ```[{slug: ['javascript', 'promise']}, {slug: ['nextjs', '1-nextblog']}]```이런식으로 만들어 줘야 하는 것입니다.
+<br/>
+간단하죠? 이렇게 모든 동적 라우팅 부분에서 SSG 설정을 해주면 에러가 해결됩니다. <br/>
+이 외에 주의할 점은 같은 레벨의 경로 내에서 SSR과 CSR이 섞여 있는지 확인해야 합니다. 이거 때문에도 많은 사람들이 문제를 겪고 있답니다!!!!
+<br/>
+
+## 긴 글 읽어주셔서 감사합니당~~

@@ -17,9 +17,9 @@ export default function TocBanner({ headings }: PropsType) {
     <div className="overflow-hidden rounded-xl border border-neutral-200 transition-all">
       <div className="p-4 pr-2 dark:border-neutral-700">
         <p className="font-bold">On this page</p>
-        <ul>
+        <ul className="mt-2 text-sm">
           {headings.map((head, idx) => (
-            head.level === 2 ? (
+            head.level === 1 || head.level === 2 ? (
               <li className="py-1" key={idx}><a href={`#${head.slug}`}>{head.text}</a></li>
             ) : (
               <li className="py-1 ml-4" key={idx}><a href={`#${head.slug}`}>{'>'} {head.text}</a></li>
