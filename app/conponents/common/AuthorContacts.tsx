@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SiGithub, SiNotion, SiVelog } from 'react-icons/si';
+import { SiGithub, SiNotion, SiVelog, SiInstagram } from 'react-icons/si';
 
 export default function AuthorContacts() {
   return (
@@ -12,6 +12,9 @@ export default function AuthorContacts() {
       </Link>
       <Link href="https://velog.io/@zop1234" target='_blank'>
         <SiVelog />
+      </Link>
+      <Link href="https://www.instagram.com/w_oovely_" target='_blank'>
+        <SiInstagram />
       </Link>
     </div>
   );
