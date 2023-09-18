@@ -1,0 +1,346 @@
+---
+title: '[JavaScript] Scope와 Closure'
+description: 'Scope와 Closure에 대해 알아봅시다.'
+tags:
+  - javascript
+  - scope
+  - closure
+  - execution context
+date: 2023-09-18
+---
+
+# Execution Context
+
+JavaScript코드를 실행시키면 JavaScript 엔진은 call stack이라는 통에 전역 실행 컨텍스트를 담습니다.
+
+## Record로 JS Hoisting 이해하기
+
+---
+
+```jsx
+console.log(TVChannel); // undefined
+var TVChannel = "Netflix";
+console.log(TVChannel); // Netflix
+```
+
+첫 번째 줄에서 undefined가 출력되는 이유는 무엇일까요?
+
+바로 코드가 실행이 되면 JavaScript 엔진이 먼저 전체 코드를 스캔하면서 변수 같은 정보를 실핸 컨텍스트 어딘가에 미리 기록해놓기 때문입니다. 이때 기록해놓는 곳이 Record입니다.
+
+호이스팅은 Variable Hoisting과 Function Hoisting으로 나뉩니다.
+
+<aside>
+🎆 ***Variable Hoisting***
+
+![Untitled](%5BJavaScript%5D%20Scope%E1%84%8B%E1%85%AA%20Closure%20810674e161d84c84b9972c7151c012c5/Untitled.png)
+
+JavaScript 엔진은 코드를 실행하면 우선 전역 실행 컨텍스트 한 칸을 생성해서 콜 스택에 넣습니다.
+
+그 후 전체 코드를 스캔하면서 선언할 게 있는지 찾아보고 있다면 먼저 선언해둡니다.
+
+![Untitled](%5BJavaScript%5D%20Scope%E1%84%8B%E1%85%AA%20Closure%20810674e161d84c84b9972c7151c012c5/Untitled%201.png)
+
+선언하는 과정에는 생성해둔 실행 컨텍스트 안에 있는 환경 레코드에 새로운 식별자인 TVChannel을 기록합니다. 그리고 undefined로 값을 초기화 해둡니다. 
+
+이렇게 본격적인 실행에 앞서 스캔하고 준비하는 단계를 생성 단계라고 합니다. 이어서 선언문 외에 나머지 코드를 순차적으로 실행하는데 이 단계를 실행 단계라고 합니다.
+
+이러한 원리로 첫 번째 출력에서 undefined라는 값이 나오게 됩니다. 하지만 let과 const일 때에는 달라집니다.
+
+let 또는 const일 때에는 엔진이 TVChannel 식별자를 기록해두긴 하지만 값을 초기화하지는 않습니다. 따라서 선언문 이전에 TVChannel을 참조하려고 하면 Reference Error가 발생합니다. 이 때 참조할 수 없는 구역을 일시적 사각지대라고 합니다.
+
+![Untitled](%5BJavaScript%5D%20Scope%E1%84%8B%E1%85%AA%20Closure%20810674e161d84c84b9972c7151c012c5/Untitled%202.png)
+
+</aside>
+
+<aside>
+🎆 ***Function Hoisting***
+
+![Untitled](%5BJavaScript%5D%20Scope%E1%84%8B%E1%85%AA%20Closure%20810674e161d84c84b9972c7151c012c5/Untitled%203.png)
+
+</aside>
+
+## Outer로 JS Scope Chaining 이해하기
+
+---
+
+Outer의 정식 명칭은 Outer Environment Referece 외부 환경 참조입니다.
+
+![Untitled](%5BJavaScript%5D%20Scope%E1%84%8B%E1%85%AA%20Closure%20810674e161d84c84b9972c7151c012c5/Untitled%204.png)
+
+이 두 동그라미를 합쳐 렉시컬 환경 또는 정적 환경이라고 불립니다.
+
+![Untitled](%5BJavaScript%5D%20Scope%E1%84%8B%E1%85%AA%20Closure%20810674e161d84c84b9972c7151c012c5/Untitled%205.png)
+
+이번에는 변수와 함수에 대해 알아보겠습니다. 전역 범위에 lamp와 함수 범위에 lamp가 존재합니다. 이 코드를 실행시키게 되면 콜 스택에는 실행 컨텍스트 하나가 먼저 생겨 lamp와 goTo2F함수를 저장합니다. 그 후 함수를 읽는 실행 컨텍스트가 그 위에 생성이 되어서 함수 범위에 있는 lamp 변수를 저장합니다. 그럼 엔진은 이 두 lamp중 어떤 걸 lamp로 선택해야 하나 고민에 빠집니다. 이런 상황에서 변수나 함수의 값을 결정하는 것을 식별자 결정이라고 합니다. 이제 여기서 어떻게 lamp를 결정하는지 Outer을 통해 알아봅시다.
+
+![Untitled](%5BJavaScript%5D%20Scope%E1%84%8B%E1%85%AA%20Closure%20810674e161d84c84b9972c7151c012c5/Untitled%206.png)
+
+항상 엔진은 새로 생성된 실행 컨텍스트에 바깥 렉시컬 환경으로 들어갈 수 있는 outer를 남겨놓습니다. 이 원리를 잘 생각해서 계속 가봅시다.
+
+![Untitled](%5BJavaScript%5D%20Scope%E1%84%8B%E1%85%AA%20Closure%20810674e161d84c84b9972c7151c012c5/Untitled%207.png)
+
+함수가 중첩으로 여러 개가 생성이 되면 이런 식으로 콜스택이 만들어집니다. 그러면 결국 엔진은 어떤 lamp를 선택할까요? 맞습니다 엔진은 실행 컨텍스트를 가장 최상단부터 읽어오기 시작합니다. 3층에 lamp가 없으면 outer을 통해 2층으로 가고 2층에 lamp가 존재하면 그 lamp를 선택하고 이후에 나오는 lamp는 신경쓰지 않고 결정해버립니다.
+
+이렇게 식별자를 결정할 때 활용하는 스코프들의 연결 리스트를 Scope Chain이라고 합니다. 그리고 식별자를 결정하기 위해 Scope chain을 이용해 찾아나가는 과정을 Scope Chaining이라고 합니다.
+
+## Execution Context 정리
+
+---
+
+Execution Context란 코드를 실행하는데 필요한 환경을 제공하는 객체입니다. 여기서 환경이란 코드 실행에 영향을 주는 조건이나 상태를 말합니다. 
+
+따라서 이 조건이나 상태를 모아둔 객체가 바로 Execution Context입니다.
+
+# Scope
+
+JavaScript의 Scope란 변수나 함수의 유효 범위를 의미합니다. 즉, 해당 변수나 함수에 접근할 수 있는 범위를 말합니다.
+
+JavaScript에서는 크게 전역 범위(Global Scope)와 지역 범위(Local Scope)로 나뉩니다.
+
+## 전역 범위(Global Scope)
+
+---
+
+전역 범위란 함수 바깥에서 선언된 변수나 함수를 의미합니다. 이러한 변수나 함수는 어디서든 접근할 수 있습니다.
+
+```jsx
+let globalVar = 'I am a global variable';
+
+function globalFunction() {
+  console.log('I am a global function');
+}
+```
+
+위의 코드에서 `globalVar`와 `globalFunction`은 전역 범위에 선언되었습니다. 따라서 어디서든 접근할 수 있습니다.
+
+## 지역 범위(Local Scope)
+
+---
+
+지역 범위란 함수 안에서 선언된 변수나 함수를 의미합니다. 이러한 변수나 함수는 해당 함수 내부에서만 접근할 수 있습니다.
+
+```jsx
+function localFunction() {
+  let localVar = 'I am a local variable';
+  console.log(localVar);
+}
+
+localFunction(); // 'I am a local variable'
+console.log(localVar); // ReferenceError: localVar is not defined
+```
+
+위의 코드에서 `localVar`는 `localFunction` 안에서 선언되었습니다. 따라서 해당 함수 안에서만 접근할 수 있으며, 함수 바깥에서는 접근할 수 없습니다.
+
+## 변수의 호이스팅(Hoisting)
+
+JavaScript에서는 변수의 선언이 해당 변수의 범위(scope)의 맨 위로 끌어올려지는 현상을 호이스팅(hoisting)이라고 합니다.
+
+```jsx
+console.log(myVar); // undefined
+var myVar = 'I am a hoisted variable';
+```
+
+위의 코드에서 `myVar`는 선언되기 전에 출력되었습니다. 이는 `var myVar` 선언이 해당 범위의 맨 위로 끌어올려졌기 때문입니다.
+
+# Closure
+
+## **클로저(Closure)란?**
+
+---
+
+- 클로저는 함수와 그 함수가 접근할 수 있는 변수의 조합입니다.
+- 클로저를 통해 함수 내부의 변수와 함수를 외부에서 접근할 수 있게 됩니다.
+
+## **클로저를 사용하는 이유**
+
+---
+
+- 변수를 보호하고 정보를 은닉할 수 있습니다.
+- 함수에서 생성된 데이터를 보관하고 접근할 수 있습니다.
+- 콜백 함수에서 외부 변수를 참조할 수 있습니다.
+
+## **클로저의 구조**
+
+---
+
+```jsx
+function outer() {
+  let outerVar = 'outer scope';
+  function inner() {
+    let innerVar = 'inner scope';
+    console.log(innerVar);
+    console.log(outerVar);
+  }
+  return inner;
+}
+
+let closureFunc = outer();
+closureFunc(); // 'inner scope'와 'outer scope' 출력
+```
+
+위 코드에서 **`inner`** 함수는 **`outer`** 함수의 지역 변수 **`outerVar`**와 ```````````````````````inner```````````````````````함수의 지역 변수 **`innerVar`**를 사용합니다. **`inner`** 함수를 리턴하는 **`outer`** 함수는 클로저를 형성하게 됩니다.
+
+## 데이터를 보존하는 함수
+
+---
+
+데이터를 보존하는 함수를 직접 만들어보겠습니다. 레시피를 제작하는 `createFoodRecipe` 함수를 만들어봅시다. 
+
+아래 코드에서는`getFoodRecipe`가 클로저로서 `foodName`, `ingredient1`, `ingredient2`에 접근할 수 있습니다.
+
+이 때, `createFoodRecipe('하이볼')`으로 전달된 문자열 `'하이볼'`은 `recipe` 함수 호출 시 계속 재사용 할 수 있습니다. `createFoodRecipe` 가 문자열 `‘하이볼’`을 “보존”하고 있기 때문입니다.
+
+```jsx
+function createFoodRecipe (foodName) {
+  let ingredient1 = '탄산수';
+  let ingredient2 = '위스키';
+  const getFoodRecipe = function () {
+    return `${ingredient1} + ${ingredient2} = ${foodName}!`;
+  }
+  return getFoodRecipe; // getFoodRecipe
+}
+
+const recipe = createFoodRecipe('하이볼');
+recipe(); // '탄산수 + 위스키 = 하이볼!'
+```
+
+이를 더 잘 응용하기 위해 `getFoodRecipe`의 매개변수도 활용할 수 있게 코드를 아래와 같이 변경해봅시다.
+
+```jsx
+function createFoodRecipe (foodName) {
+  const getFoodRecipe = function (ingredient1, ingredient2) {
+    return `${ingredient1} + ${ingredient2} = ${foodName}!`;
+  }
+  return getFoodRecipe;
+}
+
+const highballRecipe = createFoodRecipe('하이볼');
+highballRecipe('콜라', '위스키'); // '콜라 + 위스키 = 하이볼!'
+highballRecipe('탄산수', '위스키'); // '탄산수 + 위스키 = 하이볼!'
+highballRecipe('토닉워터', '연태고량주'); // '토닉워터 + 연태고량주 = 하이볼!'
+```
+
+`highballRecipe` 함수는 문자열 `‘하이볼’` 을 보존하고 있어서 전달인자를 추가로 전달할 필요가 없고, 다양한 하이볼 레시피를 하나의 함수로 제작할 수 있었습니다.
+
+## 커링
+
+---
+
+커링은 **여러 전달인자를 가진 함수**를 **함수를 연속적으로 리턴하는 함수**로 변경하는 행위입니다. 예시를 먼저 보겠습니다.
+
+`sum` 함수는 두 전달인자(10, 20)를 덧셈하는 함수고, `currySum`은 첫 번째 전달인자 10을 리턴하는 함수로 전달해줍니다. `sum`과 `currySum`이 같은 값을 리턴하기 위해서는 `currySum` 함수에서 리턴한 함수에 두 번째 전달인자 20을 전달하여 호출하면 됩니다. 이렇게 커링을 활용한 currySum과 같은 함수를 **커링 함수**라고 부르기도 합니다.
+
+```jsx
+function sum(a, b) {
+  return a + b;
+}
+
+function currySum(a) {
+	return function(b) {
+		return a + b;
+	};
+}
+
+console.log(sum(10, 20) === currySum(10)(20)) // true
+```
+
+## 모듈 패턴
+
+---
+
+JavaScript에 `class` 키워드가 없던 시절 모듈 패턴을 구현하기 위해서 클로저를 사용했습니다. 모듈은 하나의 기능을 온전히 수행하기 위한 모든 코드를 가지고 있는 코드 모음으로, 하나의 단위로서 역할을 합니다. 모듈은 다른 모듈에 의존적이지 않고 독립적이어야 합니다.
+
+다른 모듈에 의존적이지 않고 독립적이라면 기능 수행을 위한 모든 기능을 갖추고 있어야 하고, 또한 외부 코드 실행을 통해서 모듈의 속성이 훼손 받지 않아야 합니다. 모듈의 속성을 꼭 변경해야 할 필요가 있는 경우에는 제한적으로 노출된 인터페이스에 의해 변경되어야 합니다. 이 특징은 클로저와 유사합니다. 
+
+아래 코드는 계산기의 최소한의 기능을 모듈 패턴으로 구현했습니다. 
+
+`displayValue`는 `makeCalculator`의 코드 블록 외에 다른 곳에서는 접근이 불가능하지만, `cal`의 메서드는 모두 클로저의 함수로서 `displayValue`에 접근할 수 있습니다. 이렇게 데이터를 다른 코드 실행으로부터 보호하는 개념을 정보 은닉(information hiding)이라고 합니다. 
+
+이는 캡슐화(encapsulation)의 큰 특징이기도 합니다.
+
+```jsx
+function makeCalculator() {
+  let displayValue = 0;
+
+  return {
+    add: function(num) {
+      displayValue = displayValue + num;
+    },
+    subtract: function(num) {
+      displayValue = displayValue - num;
+    },
+    multiply: function(num) {
+      displayValue = displayValue * num;
+    },
+    divide: function(num) {
+      displayValue = displayValue / num;
+    },
+    reset: function() {
+      displayValue = 0;
+    },
+    display: function() {
+      return displayValue
+    }
+  }
+}
+
+const cal = makeCalculator();
+cal.display(); // 0
+cal.add(1);
+cal.display(); // 1
+console.log(displayValue) // ReferenceError: displayValue is not defined
+```
+
+## **클로저 사용 예시**
+
+---
+
+- 정보 은닉
+
+```jsx
+javascriptCopy code
+function counter() {
+  let count = 0;
+  function changeCount(val) {
+    count += val;
+  }
+  return {
+    increase: function() {
+      changeCount(1);
+    },
+    decrease: function() {
+      changeCount(-1);
+    },
+    getCount: function() {
+      return count;
+    }
+  };
+}
+
+let counter1 = counter();
+console.log(counter1.getCount()); // 0 출력
+counter1.increase();
+counter1.increase();
+console.log(counter1.getCount()); // 2 출력
+counter1.decrease();
+console.log(counter1.getCount()); // 1 출력
+```
+
+위 코드에서 **`counter`** 함수는 **`count`** 변수를 갖고 있는 클로저를 리턴합니다. 클로저를 통해 **`count`** 변수를 직접 접근할 수 없으며, **`increase`**, **`decrease`**, **`getCount`** 함수를 통해 간접적으로 접근할 수 있습니다.
+
+- 비동기 처리
+
+```jsx
+javascriptCopy code
+function printNumbers() {
+  for (let i = 1; i <= 5; i++) {
+    setTimeout(function() {
+      console.log(i);
+    }, i * 1000);
+  }
+}
+
+printNumbers(); // 1초마다 1, 2, 3, 4, 5 출력
+```
+
+위 코드에서 **`printNumbers`** 함수는 1초마다 1부터 5까지의 숫자를 출력합니다. **`setTimeout`** 함수는 비동기 처리를 하기 때문에 클로저를 사용하지 않으면 **`i`** 값이 모두 6으로 출력됩니다. 클로저를 사용하면 각각의 **`setTimeout`** 함수는 자신만의 **`i`** 값을 갖게 됩니다.

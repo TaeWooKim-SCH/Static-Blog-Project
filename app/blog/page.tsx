@@ -2,7 +2,7 @@ import Layout from "../conponents/layouts/Layout";
 import Title from "../conponents/common/Title";
 import SubTitle from "../conponents/common/SubTitle";
 import PostListItem from "../conponents/common/PostListItem";
-import {  filteredBlogPost, filteredSeriesBook } from "../libs/dataset";
+import {  AllBlogPost, filteredSeriesBook } from "../libs/dataset";
 
 export default async function Blog() {
   return (
@@ -26,11 +26,11 @@ export default async function Blog() {
         
         <div className="mt-16 flex">
           <SubTitle>All Posts</SubTitle>
-          <span className="pt-3 ml-2 text-lg font-bold">{'('}{filteredBlogPost.length}{')'}</span>
+          <span className="pt-3 ml-2 text-lg font-bold">{'('}{AllBlogPost.length}{')'}</span>
         </div>
 
         <div className="grid gap-8 grid-cols-2 mt-12">
-          {filteredBlogPost.map((post, idx) => (
+          {AllBlogPost.map((post, idx) => (
             <PostListItem post={post} key={idx} />
           ))}
         </div>
