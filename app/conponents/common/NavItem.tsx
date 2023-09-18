@@ -9,7 +9,7 @@ export default function NavItem({
   className,
 }: React.ComponentProps<'a'>) {
   const pathName = usePathname();
-  const isActive = pathName === (href ?? '/');
+  const isActive = (pathName.split('/').slice(0, 2).join('/') === (href ?? '/'));
 
   return (
     <Link

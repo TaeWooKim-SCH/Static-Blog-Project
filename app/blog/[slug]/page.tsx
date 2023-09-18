@@ -24,12 +24,16 @@ async function getSeriesPost(slug: string) {
       if (post._raw.sourceFilePath.includes('index.mdx')) {
         seriesInfo = post;
       }
-      return !post._raw.sourceFilePath.includes('index.mdx')
+      return !post._raw.sourceFilePath.includes('index.mdx');
     });
 
   if (!posts) {
     return notFound();
   }
+
+  posts.sort((a, b) => (
+    Number(a._raw.sourceFileName.split('-')[0]) - Number(b._raw.sourceFileName.split('-')[0])
+  ));
 
   return {
     seriesInfo,
