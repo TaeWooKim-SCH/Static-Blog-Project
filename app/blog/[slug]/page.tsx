@@ -4,11 +4,16 @@ import { AiOutlineCalendar, AiOutlineBook } from 'react-icons/ai';
 import { allPosts } from "@/.contentlayer/generated";
 import Layout from "@/app/conponents/layouts/Layout";
 import PostListItem from "@/app/conponents/common/PostListItem";
+import { AllSeriesName } from "@/app/libs/dataset";
 
 interface PageProps {
   params: {
     slug: string;
   }
+}
+
+export async function generateStaticParams() {
+  return AllSeriesName.map((name) => ({slug: name}));
 }
 
 async function getSeriesPost(slug: string) {
@@ -45,7 +50,7 @@ async function getSeriesPost(slug: string) {
 
 export default async function SeriesPage({ params }: PageProps) {
   const postsData = await getSeriesPost(params.slug);
-
+  console.log(AllSeriesName.map((name) => ({slug: name})));
   return (
     <Layout>
       <main className="relative pb-16">
