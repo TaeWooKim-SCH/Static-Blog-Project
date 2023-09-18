@@ -37,27 +37,27 @@ export default async function Home() {
           </div>
           <div className="grid gap-6 grid-cols-4">
             <PostItem
-              href="/blog/javascript/darkmode"
+              href="/blog/nextjs/1-nextblog"
               imgUrl={unsplashImgList[0]}
-              title="다크 모드 더 프로처럼 활용하기"
+              title="[Next.js] Next 13버전으로 블로그 만들기"
               date="2023.09.16"
             />
             <PostItem
-              href="/blog/javascript/promise"
+              href="/blog/nextjs/2-deployError"
               imgUrl={unsplashImgList[1]}
-              title="[JavaScript] Promise"
-              date="2023.09.17"
+              title="[Next.js] Vercel 배포 후 서버 에러처리"
+              date="2023.09.18"
             />
             <PostItem
-              href="/blog/javascript/prototype"
+              href="/blog/javascript/10-browser"
               imgUrl={unsplashImgList[2]}
-              title="[JavaScript] Prototype"
+              title="[JavaScript] 브라우저 동작 과정"
               date="2023.09.17"
             />
             <PostItem
-              href="/blog/nextjs/nextblog"
+              href="/blog/javascript/11-runtimeengine"
               imgUrl={unsplashImgList[3]}
-              title="Next 13버전으로 블로그 만들기"
+              title="[JavaScript] 런타임과 엔진"
               date="2023.09.16"
             />
           </div>
