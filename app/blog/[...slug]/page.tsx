@@ -15,11 +15,18 @@ import { allPosts } from 'contentlayer/generated';
 import Hr from '@/app/conponents/common/Hr';
 import TocBanner from '@/app/conponents/common/TocBanner';
 import Title from '@/app/conponents/common/Title';
+import { filteredBlogPost } from '@/app/libs/dataset';
 
 interface PageProps {
   params: {
     slug: string;
   }
+}
+
+export async function generateStaticParams() {
+  return filteredBlogPost.map((post) => ({
+    slug: post.slug.split('/').slice(2)
+  }));
 }
 
 async function getDocFromParams(slug: any) {

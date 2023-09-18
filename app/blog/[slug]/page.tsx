@@ -50,7 +50,7 @@ async function getSeriesPost(slug: string) {
 
 export default async function SeriesPage({ params }: PageProps) {
   const postsData = await getSeriesPost(params.slug);
-  console.log(AllSeriesName.map((name) => ({slug: name})));
+
   return (
     <Layout>
       <main className="relative pb-16">
