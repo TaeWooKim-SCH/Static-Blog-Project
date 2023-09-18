@@ -1,14 +1,6 @@
-import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
 import { AiOutlineCalendar } from 'react-icons/ai';
 
-// import { allPosts } from 'contentlayer/generated';
-
-// const Layout = dynamic(import('@/app/conponents/layouts/Layout'));
-// const Mdx = dynamic(import('../../conponents/common/Mdx'));
-// const Hr = dynamic(import('@/app/conponents/common/Hr'));
-// const TocBanner = dynamic(import('@/app/conponents/common/TocBanner'));
-// const Title = dynamic(import('@/app/conponents/common/Title'));
 import Layout from '@/app/conponents/layouts/Layout';
 import Mdx from '../../conponents/common/Mdx';
 import { allPosts } from 'contentlayer/generated';
