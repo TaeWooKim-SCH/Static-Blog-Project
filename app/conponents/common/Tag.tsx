@@ -1,5 +1,6 @@
 export default function Tag({
-  children, className
+  children,
+  className
 }: React.ComponentProps<'span'>) {
   return (
     <span
