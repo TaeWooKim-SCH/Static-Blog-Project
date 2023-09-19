@@ -1,20 +1,13 @@
 import Layout from "../conponents/layouts/Layout";
 import Title from "../conponents/common/Title";
-import { AllSnippets, AllSnippetsName } from "../libs/dataset";
-import SnippetListItem from "../conponents/common/SnippetListItem";
 import SnippetTag from "../conponents/common/SnippetTag";
+import SnippetListItem from "../conponents/common/SnippetListItem";
+import { AllSnippetsName } from "../libs/dataset";
+import { filteredSnippets } from "../libs/module";
 
 interface PageProps {
   params: {},
   searchParams: { [key: string]: string | undefined}
-}
-
-async function filteredSnippets(key: string ='all') {
-  if (key === 'all') {
-    return AllSnippets;
-  }
-
-  return AllSnippets.filter((post) => post.slugAsParams.split('/')[0] === key);
 }
 
 export default async function Snippets(props: PageProps) {

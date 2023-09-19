@@ -28,7 +28,7 @@ let num = 20;
 
 변수 `num`을 선언하면 컴퓨터는 `num`이라는 이름의 공간을 확보합니다. 그리고 20이라는 원시 값을 그 공간에 저장합니다. 이를 그림으로 나타내면 아래와 같습니다.
 
-![Untitled](%5BJavaScript%5D%20%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD%E1%84%92%E1%85%A7%E1%86%BC%20%E1%84%89%E1%85%B5%E1%86%B7%E1%84%92%E1%85%AA%20f563681777454418a5cf15cb27ea9900/Untitled.png)
+<img src="https://file.notion.so/f/s/2b3e3d41-9599-4e3a-b625-fd0d933f360d/Untitled.png?id=fbf3009d-7fed-4e59-ae80-e01e4456dec4&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=KtWM9QwKFQ5HRaY1FnU8cbSMts8Yf65xyG8XHnIkfOA&downloadName=Untitled.png" />
 
 만약 어떤 변수에 저장되어 있는 원시 자료형을 다른 변수에 할당하면 어떻게 될까요?
 
@@ -39,7 +39,7 @@ let copiedNum = num:
 
 원시 자료형은 값 자체가 복사됩니다. 즉, 변수 `num`과 변수 `copiedNum`은 동일하게 20이라는 값을 가집니다.
 
-![Untitled](%5BJavaScript%5D%20%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD%E1%84%92%E1%85%A7%E1%86%BC%20%E1%84%89%E1%85%B5%E1%86%B7%E1%84%92%E1%85%AA%20f563681777454418a5cf15cb27ea9900/Untitled%201.png)
+<img src="https://file.notion.so/f/s/b386d397-41ef-412c-be47-78dd76a4674a/Untitled.png?id=f9d71161-4008-4875-8519-25fef204d4aa&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=q5b9IdEZj-g_lofl2oOoz4CiM4bQJVxQSr8eeOc64uo&downloadName=Untitled.png" />
 
 ## 참초 자료형
 
@@ -58,7 +58,7 @@ JavaScript는 참조 자료형을 어떻게 저장할까요? JavaScript는 **특
 
 참조 자료형이 할당된 변수를 다른 변수에 할당하면, 이 두 변수는 같은 주소를 가리킵니다.
 
-![Untitled](%5BJavaScript%5D%20%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD%E1%84%92%E1%85%A7%E1%86%BC%20%E1%84%89%E1%85%B5%E1%86%B7%E1%84%92%E1%85%AA%20f563681777454418a5cf15cb27ea9900/Untitled%202.png)
+<img src="https://file.notion.so/f/s/55511da0-362f-4418-a11b-e49c1f3a3684/Untitled.png?id=ca2b627d-aa9c-4533-aa5f-f556b8f5267b&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=bMUXAgw0nmeYfGAM_ODoqWDrIE2AcZnI682veYLxNlg&downloadName=Untitled.png" />
 
 ## ****변경 불가능한 값 vs 변경이 가능한 값****
 
@@ -70,7 +70,7 @@ JavaScript는 참조 자료형을 어떻게 저장할까요? JavaScript는 **특
 let num = 20;
 ```
 
-![Untitled](%5BJavaScript%5D%20%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD%E1%84%92%E1%85%A7%E1%86%BC%20%E1%84%89%E1%85%B5%E1%86%B7%E1%84%92%E1%85%AA%20f563681777454418a5cf15cb27ea9900/Untitled%203.png)
+<img src="https://file.notion.so/f/s/2cccf03d-a821-40c0-b848-70b60b8920bd/Untitled.png?id=7ca95227-b535-4d34-aec2-adeb57e873c1&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=lKBIoF61cCWFVTIZhgbbxs8zEAwDYdl2nFnWwEW9HPI&downloadName=Untitled.png" />
 
 여기서 변수 `num`에 할당된 값을 숫자 `20` 대신, 다른 값으로 변경할 수 있을까요? 다른 값을 변수에 재할당하면 됩니다.
 
@@ -82,11 +82,11 @@ num = 30;
 
 `num`이라는 변수가 참조하던 공간에 들어 있던 `20`이 `30`으로 변경될 것 같지만, 메모리 내부에서는 이처럼 동작하지 않습니다.
 
-![Untitled](%5BJavaScript%5D%20%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD%E1%84%92%E1%85%A7%E1%86%BC%20%E1%84%89%E1%85%B5%E1%86%B7%E1%84%92%E1%85%AA%20f563681777454418a5cf15cb27ea9900/Untitled%204.png)
+<img src="https://file.notion.so/f/s/7bc759c1-6410-4abd-8eae-ab0ac8f98e6a/Untitled.png?id=c7aaf5c3-d562-470c-b930-288c8ef337eb&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=-bfx8IJvjmXuagiYuofJFjTrfAqJ2tcbl78oCbv3gV0&downloadName=Untitled.png" />
 
 남아 있는 값 20은 어떻게 될까요? JavaScript 엔진은 이처럼 사용하지 않는 값을 자동으로 메모리에서 삭제합니다. 이런 기능을 **가비지 콜렉터(garbage collector)**라고 합니다. 그러나 가비지 콜렉터가 어느 시점이 진행되는지는 예측할 수 없습니다.
 
-![Untitled](%5BJavaScript%5D%20%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD%E1%84%92%E1%85%A7%E1%86%BC%20%E1%84%89%E1%85%B5%E1%86%B7%E1%84%92%E1%85%AA%20f563681777454418a5cf15cb27ea9900/Untitled%205.png)
+<img src="https://file.notion.so/f/s/1605a6e0-e21f-4de8-8d83-6f35d3949e8c/Untitled.png?id=0957ebc7-2503-40eb-871f-810064d37080&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=mKTQu9UOnsFe4o86e-Zjx6QJZFCinv_V4unNd6kPrZI&downloadName=Untitled.png" />
 
 ### 2. 변경 가능한 값
 
@@ -104,7 +104,7 @@ console.log(arr); // [1, 2, '3', 4]
 
 위 코드가 실행되면, 변수가 참조하고 있는 주소에 저장되어 있는 값을 변경합니다.
 
-![Untitled](%5BJavaScript%5D%20%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD%E1%84%92%E1%85%A7%E1%86%BC%20%E1%84%89%E1%85%B5%E1%86%B7%E1%84%92%E1%85%AA%20f563681777454418a5cf15cb27ea9900/Untitled%206.png)
+<img src="https://file.notion.so/f/s/0dd68865-f3e6-48f6-96ca-052a132212f6/Untitled.png?id=6955a7a3-efd5-4889-a6fd-660db90bcb89&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=FkKLwuJOk28ODZKHe4qm4bxGCQE29RmsYlrxnHyd0W4&downloadName=Untitled.png" />
 
 문자열은 원시 자료형이지만 배열처럼 인덱스로 문자열의 각 문자에 접근이 가능합니다.
 
@@ -131,7 +131,7 @@ console.log(copiedArr); // [0, 1, 2, 3, 4]
 console.log(arr === copiedArr) // true
 ```
 
-![Untitled](%5BJavaScript%5D%20%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD%E1%84%92%E1%85%A7%E1%86%BC%20%E1%84%89%E1%85%B5%E1%86%B7%E1%84%92%E1%85%AA%20f563681777454418a5cf15cb27ea9900/Untitled%207.png)
+<img src="https://file.notion.so/f/s/2b5dcf5a-ad45-4317-8f1b-fd1e0f1dfcbd/Untitled.png?id=43beb239-0fde-4656-9fc2-7049bc6230ea&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=3EcaEe-DqhFj0Kr2eeL_PCnpSjpFSv-WrpV4X2RUnnY&downloadName=Untitled.png" />
 
 다시 말해, **참조 자료형이 저장된 변수를 다른 변수에 할당할 경우, 두 변수는 같은 주소를 참조하고 있을 뿐 값 자체가 복사 되었다고 볼 수 없습니다.**
 
@@ -166,7 +166,7 @@ let copiedUsers = users.slice();
 console.log(users === copiedUsers); // false
 ```
 
-![Untitled](%5BJavaScript%5D%20%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD%E1%84%92%E1%85%A7%E1%86%BC%20%E1%84%89%E1%85%B5%E1%86%B7%E1%84%92%E1%85%AA%20f563681777454418a5cf15cb27ea9900/Untitled%208.png)
+<img src="https://file.notion.so/f/s/3a3a25a8-93d5-4c41-a255-75d4f38fa0ac/Untitled.png?id=19f16e13-d62c-453e-a3bd-20646e15998d&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=93_gV85TM6L5X-gw4GuijUG6IjNblE-jaBaLNWMy0G0&downloadName=Untitled.png" />
 
 ## 깊은 복사
 
@@ -186,7 +186,7 @@ console.log(arr === copiedArr) // false
 console.log(arr[2] === copiedArr[2]) // false
 ```
 
-![Untitled](%5BJavaScript%5D%20%E1%84%8C%E1%85%A1%E1%84%85%E1%85%AD%E1%84%92%E1%85%A7%E1%86%BC%20%E1%84%89%E1%85%B5%E1%86%B7%E1%84%92%E1%85%AA%20f563681777454418a5cf15cb27ea9900/Untitled%209.png)
+<img src="https://file.notion.so/f/s/fda758b3-b586-4e15-ba08-45654bf7d6fc/Untitled.png?id=cca78d27-54e0-4364-9a0e-ed3edaed5b17&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=cs6x2PqzPo0Y_jk4P65qFJhpRzreKSVKuL1L5s2W0kI&downloadName=Untitled.png" />
 
 간단하게 깊은 복사를 할 수 있는 것처럼 보이지만, 이 방법 또한 깊은 복사가 되지 않는 예외가 존재합니다. 대표적인 예로 중첩된 참조 자료형 중에 함수가 포함되어 있을 경우 위 방법을 사용하면 함수가 `null`로 바뀌게 됩니다. 따라서 이 방법 또한 완전한 깊은 복사 방법이라고 보기 어렵습니다.
 

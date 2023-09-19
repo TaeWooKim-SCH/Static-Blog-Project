@@ -137,14 +137,14 @@ class Crew extends Person {
 - 이 경우에는 `__proto__`(프로토) 외에도 만들어지는 것이 있습니다. 그것이 바로 **함수의 프로토타입 객체입니다**.
 - 예를 들어 Person 함수가 있다면 Person과 자동으로 연결된 프로토타입 객체가 함께 만들어집니다. Person함수의 프로토타입 객체는 그 프로토타입 객체 안에 constructor라는 속성을 통해 Person함수를 가리키는 순환 체계를 갖고 있습니다.
     
-    ![Untitled](%5BJavaScript%5D%20%E1%84%80%E1%85%A2%E1%86%A8%E1%84%8E%E1%85%A6%20%E1%84%8C%E1%85%B5%E1%84%92%E1%85%A3%E1%86%BC%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%85%E1%85%A2%E1%84%86%E1%85%B5%E1%86%BC%209430bd597b1540af887ff4d1f3715441/Untitled.png)
+    <img src="https://file.notion.so/f/s/b6337339-870a-4719-869d-2dd0d09cee73/Untitled.png?id=e6b82115-a2a4-4dd1-bada-b4dd6dad572d&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=jBl_8hV6MQCFaKCgfm4fcMfu3bxcicH9KF_jliKIZPI&downloadName=Untitled.png" />
     
 
 ### 3. new + 함수로 만들어진 객체라면
 
 - 만들어진 새로운 객체에 `__proto__` 링크가 Person 객체의 prototype을 가리킵니다.
     
-    ![Untitled](%5BJavaScript%5D%20%E1%84%80%E1%85%A2%E1%86%A8%E1%84%8E%E1%85%A6%20%E1%84%8C%E1%85%B5%E1%84%92%E1%85%A3%E1%86%BC%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%85%E1%85%A2%E1%84%86%E1%85%B5%E1%86%BC%209430bd597b1540af887ff4d1f3715441/Untitled%201.png)
+    <img src="https://file.notion.so/f/s/07c25ef7-c212-4259-84ac-71f50dd1b876/Untitled.png?id=0f55f2e6-fd95-4cc7-bf74-c54781a497f5&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=ByRoexgeu_01GzzRgTJlubGwIk1eUHzBBI-NmCQIdaQ&downloadName=Untitled.png" />
     
 
 ## 프로토타입 체이닝 이해하기
@@ -223,7 +223,7 @@ arr 배열 객체의 원형은 Array입니다. 그러면 객체 == 프로퍼티�
 
 정확히는 아닙니다. 함수 객체가 가지는 프로토타입이라는 특수한 형태의 객체 프로퍼티를 통해 상속받습니다.
 
-![Untitled](%5BJavaScript%5D%20%E1%84%80%E1%85%A2%E1%86%A8%E1%84%8E%E1%85%A6%20%E1%84%8C%E1%85%B5%E1%84%92%E1%85%A3%E1%86%BC%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%85%E1%85%A2%E1%84%86%E1%85%B5%E1%86%BC%209430bd597b1540af887ff4d1f3715441/Untitled%202.png)
+<img src="https://file.notion.so/f/s/526acc77-a6a6-467e-9dd7-a4e930604c24/Untitled.png?id=46678e6f-6b19-4b97-861f-3ad810761db8&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=PdXE-UP9oMWOMyAdK7XnRVwdI8bKEw7VywnbJ_P0uxw&downloadName=Untitled.png" />
 
 `Array.prototype`을 통해 새롭게 데이터를 만들 수도 있습니다.
 
@@ -243,7 +243,7 @@ arr.sort(); // 파괴
 
 상속이 .prototype 프로퍼티를 통해서 가능하다면 인스턴가 자신의 프로토타입은 .__proto__를 통해서 가능합니다.
 
-![Untitled](%5BJavaScript%5D%20%E1%84%80%E1%85%A2%E1%86%A8%E1%84%8E%E1%85%A6%20%E1%84%8C%E1%85%B5%E1%84%92%E1%85%A3%E1%86%BC%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%85%E1%85%A2%E1%84%86%E1%85%B5%E1%86%BC%209430bd597b1540af887ff4d1f3715441/Untitled%203.png)
+<img src="https://file.notion.so/f/s/556ac3de-c2f3-44a6-bb54-5ff04bb61fb0/Untitled.png?id=1c3e771f-23aa-47dc-b7b5-3bc3a824e2c8&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=gZLkM3MvwQtuNIutc2ze32xrDy6zKzM_UrCbMyjvjlE&downloadName=Untitled.png" />
 
 ```jsx
 // 부모 클래스
@@ -273,7 +273,7 @@ Array의 프로토타입을 알아봅시다. Array의 프로토타입은 바로 
 
 우선 Array는 함수입니다. 함수는 객체입니다. 함수 객체만 프로토타입 프로퍼티를 가질 수 있고 인스턴스를 생성할 수 있습니다.
 
-![Untitled](%5BJavaScript%5D%20%E1%84%80%E1%85%A2%E1%86%A8%E1%84%8E%E1%85%A6%20%E1%84%8C%E1%85%B5%E1%84%92%E1%85%A3%E1%86%BC%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%80%E1%85%B3%E1%84%85%E1%85%A2%E1%84%86%E1%85%B5%E1%86%BC%209430bd597b1540af887ff4d1f3715441/Untitled%204.png)
+<img src="https://file.notion.so/f/s/b9323f4b-a732-4d07-a0a0-598ae43dbe19/Untitled.png?id=7fd4212f-29a1-474f-83b1-7b22e903652e&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=nTt3GscONS-rNdzwU5uepE4RenjXdq6NPnvDtDl0K20&downloadName=Untitled.png" />
 
 - 그렇다면 프로토타입 체인의 끝나는 지점은 어디일까요? null
 
