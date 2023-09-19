@@ -20,7 +20,7 @@ export default function SnippetTag({ name }: any) {
   );
 
   return (
-    <Link href={`/snippets?key=${name}`}>
+    <Link href={`?key=${name}`}>
       <Tag
         className={`${
           isActive ? 'font-bold border-gray-400 border-2' : 'font-normal'
