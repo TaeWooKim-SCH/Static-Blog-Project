@@ -1,0 +1,177 @@
+---
+title: '(react) Kakao Map API'
+description: 'React.js를 위한 Kakao 지도 API를 사용해봅시다.'
+date: '2023-04-01'
+tags:
+  - react
+  - kakao api
+  - api
+  - map
+---
+
+# [React] Kakao Map API
+
+태그: Not started
+
+![Untitled](%5BReact%5D%20Kakao%20Map%20API%20c3f0b0557aac483e8cbe399e568ff63b/Untitled.png)
+
+이번에는 카카오 지도를 불러오는 카카오 맵 API를 통해 만들어 봤습니다.
+
+가장 먼저 index.html 메인 파일에서 다음과 같은 스크립트 태그를 추가해 줍니다.
+
+```html
+<script
+  type="text/javascript"
+  src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 넣으시면 됩니다.&libraries=services,clusterer"
+></script>
+```
+
+다음으로 리액트에서 편리하게 카카오맵을 사용할 수 있도록 카카오 맵 라이브러리를 다운받습니다.
+
+```jsx
+npm install react-kakao-maps-sdk
+```
+
+이제 실제로 지도를 띄워봅시다. App 컴포넌트를 다음과 같이 작성해주세요.
+
+```jsx
+// App.js
+import './App.css';
+import KakaoMap from './Components/KakaoMap';
+
+function App() {
+
+  return (
+    <div className="App">
+      <nav className = "navbar">
+        <h1>Kakao Map API</h1>
+      </nav>
+      <KakaoMap/> // KakaoMap 컴포넌트
+    </div>
+  );
+}
+
+export default App;
+```
+
+간단히 초기 작업을 해줍니다. 넷바를 만들고 그 밑에 지도를 띄우려고 합니다. 이제 KakaoMap 컴포넌트를 만들러 가봅시다.
+
+가장 먼저카카오 맵 라이브러리에서 Map과 MapMarker 컴포넌트를 불러와줍니다. 
+
+```jsx
+// KakaoMap.js
+import "./KakaoMap.css"
+import { Map, MapMarker } from "react-kakao-maps-sdk"
+import { useState } from "react";
+```
+
+이 라이브러리는 정말 편하게 만들어졌습니다. 만약 라이브러리가 없다면 다음과 같이 useEffect로 바닐라 js 느낌으로 만들어야 합니다.
+
+```jsx
+useEffect(() => {
+      // 지도 표시하기
+      let container = document.getElementById("map");
+      let options = {
+          center: new window.kakao.maps.LatLng(36.8338870, 127.1334253),
+          level: 3,
+      };
+      let map = new window.kakao.maps.Map(container, options);
+
+      // 마커 생성하기
+      let marker = new window.kakao.maps.Marker({
+          position: map.getCenter(),
+          clickable: true
+      })
+      marker.setMap(map);
+      
+      // 임의의 위치 클릭 이벤트
+      window.kakao.maps.event.addListener(map, 'click', (mouseEvent) => {
+          let latlng = mouseEvent.latLng;
+          let message = `위도: ${latlng.getLat()}, 경도: ${latlng.getLng()}`;
+          marker.setPosition(latlng);
+          alert(message);
+      })
+
+      // 마커 클릭이벤트
+      let iwContent = '<div style="padding:5px;">Hello World!</div>', iwRemoveable = true;
+      let infowindow = new window.kakao.maps.InfoWindow({
+          content: iwContent,
+          removable: iwRemoveable
+      })
+
+      window.kakao.maps.event.addListener(marker, 'click', () => {
+          infowindow.open(map, marker);
+      })
+  })
+```
+
+정말 복잡하죠? 라이브러리 덕분에 정말 리액트에서 정말 편하게 사용할 수 있습니다.
+
+KakaoMap 컴포넌트에서 Map 컴포넌트를 이용해 지도를 화면에 띄워주는 작업을 해봅시다.
+
+```jsx
+<Map 
+	center = {{lat: 36.8338870, lng: 127.1334253}} 
+	style = {{width: "100%", height:"100%"}}
+	level = {3}
+	onClick = {markerClick}
+/>
+```
+
+Map 컴포넌트에서는 center 옵션으로 처음 렌더링 됐을 때 나타날 위치를 위도와 경도를 이용해 설정할 수 있습니다. 그리고 level 옵션은 확대/축소 옵션입니다. level 3 정도의 줌 상태로 처음 화면에 나타나는 것입니다. 그리고 onClick 옵션은 나중에 마커를 찍어주기 위해 추가했습니다.
+
+다음으로는 전체 코드인데 마커를 찍고 마커를 클릭하면 작은 창이 뜨는 것까지 구현이 되어 있습니다. 여기서부터는 여러분이 직접 해보시길 바랍니다.
+
+```jsx
+// KakaoMap.js
+import "./KakaoMap.css"
+import { Map, MapMarker } from "react-kakao-maps-sdk"
+import { useState } from "react";
+
+const KakaoMap = () => {
+  const [position, setPosition] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+  const markerClick = (_t, mouseEvent) => {
+      setPosition({
+          lat: mouseEvent.latLng.getLat(),
+          lng: mouseEvent.latLng.getLng(),
+      });
+  }
+
+  return (
+    <>
+      <div className="view-map">
+        <Map 
+          center = {{lat: 36.8338870, lng: 127.1334253}} 
+          style = {{width: "100%", height:"100%"}}
+          level = {3}
+          onClick = {markerClick}
+        >
+        {position && <MapMarker position = {position} clickable = {true} onClick = {() => setIsOpen(true)}>
+          {isOpen &&(
+            <div style = {{width: "210px"}}>
+              <img
+                alt="close"
+                width="14"
+                height="13"
+                src="https://t1.daumcdn.net/localimg/localimages/07/mapjsapi/2x/bt_close.gif"
+                style={{
+                    position: "absolute",
+                    right: "5px",
+                    top: "5px",
+                    cursor: "pointer",
+                }}
+                onClick={() => setIsOpen(false)}
+              />
+                <div style={{ padding: "5px", color: "#000" }}>위도: {position.lat} 경도: {position.lng}</div>
+            </div>
+          )}
+          </MapMarker>}
+        </Map>
+      </div>
+    </>
+  );
+}
+
+export default KakaoMap;
+```

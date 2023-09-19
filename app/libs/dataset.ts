@@ -8,3 +8,10 @@ export const AllSeriesName = allPosts
   .map((post) => post.slug.split('/')[2]);
 
 export const filteredSeriesBook = allPosts.filter((post) => post._raw.sourceFilePath.includes('index.mdx'));
+
+export const AllSnippets = allPosts
+  .filter((post) => post._raw.sourceFilePath.includes('snippets'));
+
+export const AllSnippetsName = Array.from(new Set(AllSnippets.map((post) => (
+  post._raw.sourceFilePath.split('/')[1]
+))));

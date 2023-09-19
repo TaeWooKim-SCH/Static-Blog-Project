@@ -15,7 +15,7 @@ export default function PostListItem({ post }: any) {
       <div className="mt-2 inline-flex w-full items-start gap-2 text-sm">
         <div className="flex flex-wrap items-center gap-2">
           {post.tags.map((tag: string, i: number) => (
-            <Tag key={i} tag={tag} />
+            <Tag key={i}>{tag}</Tag>
           ))}
         </div>
 
