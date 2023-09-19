@@ -1,9 +1,13 @@
-import Link from "next/link";
+'use client'
+
 import LogoIcon from "../icons/LogoIcon";
 import NavItem from "../common/NavItem";
+import useChangeTheme from "@/app/libs/useChangeTheme";
+import SunIcon from "../icons/SunIcon";
 
 export default function HeaderNav() {
-  const navKind = [['blog', 'Blog'], ['snippets', 'Snippets'], ['archives', 'Archives']]
+  const navKind = [['blog', 'Blog'], ['snippets', 'Snippets'], ['archives', 'Archives']];
+  const { theme, themeChangeLight, themeChangeDark } = useChangeTheme();
 
   return (
     <nav className="py-12 flex justify-between">
@@ -19,10 +23,9 @@ export default function HeaderNav() {
           >{kind[1]}</NavItem>
         ))}
       </div>
-      {/* <div>
-        <button>search</button>
-        <button>search</button>
-      </div> */}
+      <div>
+        {theme ? <button onClick={themeChangeDark}><SunIcon /></button> : <button onClick={themeChangeLight}><SunIcon /></button>}
+      </div>
     </nav>
   );
 }

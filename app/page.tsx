@@ -1,3 +1,5 @@
+import { motion, AnimatePresence } from "framer-motion"
+
 import LinkArrow from "./conponents/common/LinkArrow"
 import PostItem from "./conponents/common/PostItem";
 import SubTitle from "./conponents/common/SubTitle"
