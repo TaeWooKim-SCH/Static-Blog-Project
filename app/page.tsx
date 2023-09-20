@@ -1,5 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion"
-
+import FeaturePosts from "./conponents/FeaturePosts";
 import LinkArrow from "./conponents/common/LinkArrow"
 import PostItem from "./conponents/common/PostItem";
 import SubTitle from "./conponents/common/SubTitle"
@@ -33,7 +32,7 @@ export default async function Home() {
             <LinkArrow href="https://taewoo-portfolio.netlify.app" target="_blank">More about me</LinkArrow>
           </div>
         </section>
-        <section className="mt-16">
+        {/* <section className="mt-16">
           <div className="mb-6">
             <SubTitle>Featured Posts</SubTitle>
           </div>
@@ -66,7 +65,8 @@ export default async function Home() {
           <div className="mt-7">
             <LinkArrow href="/blog">Read all posts</LinkArrow>
           </div>
-        </section>
+        </section> */}
+        <FeaturePosts />
       </main>
     </Layout>
   )
