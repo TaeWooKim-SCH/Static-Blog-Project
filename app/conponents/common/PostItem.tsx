@@ -5,7 +5,7 @@ export default function PostItem({ href, imgUrl, title, date }: PropsType) {
   return (
     <a
       href={href}
-      className="overflow-hidden rounded-xl bg-neutral-200 dark:bg-neutral-800"
+      className="hover:scale-[1.03] transition-all overflow-hidden rounded-xl bg-neutral-200 dark:bg-neutral-800"
     >
       <div>
         <Image
