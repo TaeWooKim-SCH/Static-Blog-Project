@@ -5,7 +5,7 @@ export default function PostItem({ href, imgUrl, title, date }: PropsType) {
   return (
     <a
       href={href}
-      className="overflow-hidden rounded-xl bg-neutral-200"
+      className="overflow-hidden rounded-xl bg-neutral-200 dark:bg-neutral-800"
     >
       <div>
         <Image
@@ -18,10 +18,10 @@ export default function PostItem({ href, imgUrl, title, date }: PropsType) {
       </div>
       <div className="p-6">
         <div className="flex items-center mb-2">
-          <AiOutlineCalendar size="12" />
-          <div className="ml-1 text-xs">{date}</div>
+          <AiOutlineCalendar className="dark:fill-white" size="12" />
+          <div className="ml-1 text-xs dark:text-[#dddddd]">{date}</div>
         </div>
-        <p className="text-xl font-bold tracking-tight">{title}</p>
+        <p className="text-xl font-bold tracking-tight dark:text-[#dddddd]">{title}</p>
       </div>
     </a>
   );

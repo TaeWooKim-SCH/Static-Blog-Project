@@ -22,12 +22,12 @@ export default async function Home() {
         <section>
           <Title>taewoo</Title>
           <div className="mb-4 text-[1.1rem]">
-            <span className="text-[#555555]">Hello, I{"'"}m </span>
-            <span className="font-bold">Frontend Developer</span>
-            <span className="text-[#555555]">.</span>
+            <span className="text-[#555555] dark:text-[#dddddd]">Hello, I{"'"}m </span>
+            <span className="font-bold dark:text-white">Frontend Developer</span>
+            <span className="text-[#555555] dark:text-[#dddddd]">.</span>
           </div>
           <div className="mb-4 text-[1.1rem]">
-            <span className="text-[#555555]">wanted to convey my knowledge to people.</span>
+            <span className="text-[#555555] dark:text-[#dddddd]">wanted to convey my knowledge to people.</span>
           </div>
           <div>
             <LinkArrow href="https://taewoo-portfolio.netlify.app" target="_blank">More about me</LinkArrow>

@@ -12,8 +12,8 @@ export default function PostLayout({ post }: any) {
       <div className="flex flex-col items-center pb-4">
         <Title>{post.title}</Title>
         <div className="text-sm flex items-center">
-          <AiOutlineCalendar />
-          <div className="ml-1">{new Date(post.date).toISOString().substring(0, 10)}</div>
+          <AiOutlineCalendar className="dark:fill-[#dddddd]" />
+          <div className="ml-1 dark:text-[#dddddd]">{new Date(post.date).toISOString().substring(0, 10)}</div>
         </div>
       </div>
       <Hr className="mb-14" />

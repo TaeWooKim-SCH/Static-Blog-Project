@@ -5,6 +5,7 @@
 
 * {
   /* font-family: 'Spoqa Han Sans Neo', 'sans-serif'; */
+  /* color: #eeeeee; */
   color: #242424;
   margin: 0;
   padding: 0;
@@ -12,7 +13,7 @@
 }
 
 body {
-  background-color: rgb(247, 247, 247);
+  background-color: #F7F7F7;
 }
 
 ::selection {

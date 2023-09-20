@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Hr className="mb-8" />
         <div className="flex flex-col items-end space-y-1">
           <AuthorContacts />
-          <p className="text-[0.9rem]">© 2023 taewoo blog Powered by Next.js, Vercel App</p>
+          <p className="text-[0.9rem] dark:text-[#dddddd]">© 2023 taewoo blog Powered by Next.js, Vercel App</p>
         </div>
       </footer>
     </div>

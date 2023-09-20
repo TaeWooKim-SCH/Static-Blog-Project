@@ -16,7 +16,7 @@ export default function NavItem({
       href={href ?? '/'}
       className={`${
         isActive ? 'text-primary font-semibold' : 'text-secondary font-normal'
-      } ${className} text-[1.05rem] transition-all hover:bg-gray-200 rounded-[5px]`}
+      } ${className} text-[1.05rem] transition-all hover:bg-gray-200 rounded-[5px] dark:hover:bg-[#262626] dark:text-[#eeeeee]`}
     >
       { children }
     </Link>

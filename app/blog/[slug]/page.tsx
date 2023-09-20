@@ -50,24 +50,24 @@ export default async function SeriesPage({ params }: PageProps) {
         <section>
           <div className="grid gap-8 grid-cols-3 sm:gap-32">
             <div className="p-10">
-              <div className="relative mx-auto h-[336px] w-[240px] select-none rounded-lg bg-neutral-200 px-11 pb-16 pt-12">
-                <div className="absolute inset-y-0 left-4 w-[1px] bg-neutral-50"></div>
-                <div className="flex h-full break-keep bg-neutral-50 px-3 py-4 text-xl font-semibold">
+              <div className="relative mx-auto h-[336px] w-[240px] select-none rounded-lg bg-neutral-200 px-11 pb-16 pt-12 dark:bg-neutral-800">
+                <div className="absolute inset-y-0 left-4 w-[1px] bg-neutral-50 dark:bg-neutral-700"></div>
+                <div className="flex h-full break-keep bg-neutral-50 px-3 py-4 text-xl font-semibold dark:bg-neutral-700 dark:text-[#dddddd]">
                   {postsData.seriesInfo.title}
                 </div>
               </div>
             </div>
             <div className="col-span-2">
-              <div className="bg-neutral-200 rounded-lg px-5 py-4">
-                <p>{postsData.seriesInfo.description}</p>
+              <div className="bg-neutral-200 rounded-lg px-5 py-4 dark:bg-neutral-800">
+                <p className="dark:text-[#dddddd]">{postsData.seriesInfo.description}</p>
                 <div className="flex text-xs mt-1">
                   <div className="flex items-center mr-3">
-                    <AiOutlineCalendar />
-                    <div className="ml-1">{new Date(postsData.seriesInfo.date).toISOString().substring(0, 10)}</div>
+                    <AiOutlineCalendar className="dark:fill-[#dddddd]" />
+                    <div className="ml-1 dark:text-[#dddddd]">{new Date(postsData.seriesInfo.date).toISOString().substring(0, 10)}</div>
                   </div>
                   <div className="flex items-center">
-                    <AiOutlineBook />
-                    <div className="ml-1">{postsData.posts.length}편</div>
+                    <AiOutlineBook className="dark:fill-[#dddddd]" />
+                    <div className="ml-1 dark:text-[#dddddd]">{postsData.posts.length}편</div>
                   </div>
                 </div>
               </div>
