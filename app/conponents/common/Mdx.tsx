@@ -1,4 +1,5 @@
 import { useMDXComponent } from "next-contentlayer/hooks";
+// import '../../styles/prose.css';
 
 interface PageProps {
   data: string;
