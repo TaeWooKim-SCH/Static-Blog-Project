@@ -23,11 +23,17 @@ export default function TocBanner({ headings }: PropsType) {
           {headings.map((head, idx) => (
             head.level === 1 || head.level === 2 ? (
               <li className="py-1" key={idx}>
-                <a className="dark:text-[#a1a1a1] dark:hover:text-[#dddddd]" href={`#${head.slug}`}>{head.text}</a>
+                <a
+                  className="hover:drop-shadow-2xl dark:text-[#a7a7a7] dark:hover:text-[#dddddd]"
+                  href={`#${head.slug}`}
+                >{head.text}</a>
               </li>
             ) : (
               <li className="py-1 ml-2" key={idx}>
-                <a className="flex items-center dark:text-[#a1a1a1] dark:hover:text-[#dddddd] text-xs" href={`#${head.slug}`}>
+                <a
+                  className="flex items-center hover:drop-shadow-2xl dark:text-[#a7a7a7] dark:hover:text-[#dddddd] text-xs"
+                  href={`#${head.slug}`}
+                >
                   <HiChevronRight className="dark:fill-[#a1a1a1]" /> {head.text}
                 </a>
               </li>
@@ -35,11 +41,17 @@ export default function TocBanner({ headings }: PropsType) {
           ))}
         </ul>
       </div>
-      <div className="flex items-center justify-end p-4 bg-neutral-200 dark:bg-neutral-700">
-        <button className="w-9 h-9 mr-auto rounded-[5px] hover:bg-gray-300 dark:hover:bg-[#262626]" onClick={copyLinkHandler}>
+      <div className="flex items-center justify-end p-2 bg-neutral-200 dark:bg-neutral-700">
+        <button
+          className="w-9 h-9 mr-auto rounded-[5px] hover:bg-gray-300 dark:hover:bg-[#262626]"
+          onClick={copyLinkHandler}
+        >
           <BiLink className="dark:fill-[#a1a1a1] mx-auto" size="25" />
         </button>
-        <button className="w-9 h-9 rounded-[5px] hover:bg-gray-300 dark:hover:bg-[#262626]" onClick={topScrollHandler}>
+        <button
+          className="w-9 h-9 rounded-[5px] hover:bg-gray-300 dark:hover:bg-[#262626]"
+          onClick={topScrollHandler}
+        >
           <HiMiniArrowUturnUp className="dark:fill-[#a1a1a1] mx-auto" size="20" />
         </button>
         <ChangeTheme />
