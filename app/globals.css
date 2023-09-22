@@ -3,6 +3,8 @@
 @tailwind utilities;
 /* @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css); */
 
+@import './styles/prose.css';
+
 * {
   /* font-family: 'Spoqa Han Sans Neo', 'sans-serif'; */
   /* color: #eeeeee; */
