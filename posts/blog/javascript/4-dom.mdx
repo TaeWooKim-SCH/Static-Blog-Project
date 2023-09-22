@@ -23,13 +23,13 @@ DOM은 Document Object Model의 약자로, HTML 요소를 Object(JavaScript Obje
 
 ---
 
-<img src="https://file.notion.so/f/s/35ae7f3b-f4d4-4d1a-9c32-babe46aadc23/Untitled.png?id=58c5b523-61d7-4762-b9e5-6f5daf1b4984&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=IBtb_zSPcDd2o-c2-EUttngGYzKBZp48r7YQSBj1jqg&downloadName=Untitled.png" />
+![230922-150251](/posts/4-dom/230922-150251.png)
 
 ## `<body>` 요소가 끝나기 전에 삽입하는 경우
 
 ---
 
-<img src="https://file.notion.so/f/s/2b43706c-b46c-4c58-97dd-7f7360c76ff8/Untitled.png?id=3b0cebbe-85a2-4c8d-a8f4-2b31c178e6fa&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=qjVWXonB5PSMrkdd6O3QayAPfLCDFk-mAV0XGBg1MVY&downloadName=Untitled.png" />
+![230922-150316](/posts/4-dom/230922-150316.png)
 
 ## 두 방식의 공통점과 차이점
 
@@ -75,7 +75,7 @@ const tweetDiv = document.createElement('div');
 
 아직 화면에 변화가 없는 게 당연합니다. `tweetDiv`라는 요소는 현재 공중부양 중입니다. 다음 그림을 보며 설명합니다. DOM의 구조를 나타내는 트리 구조를 하나 그립니다. 아무것도 연결이 되어있지 않은 하나의 노드를 그립니다.
 
-<img src="https://file.notion.so/f/s/9d9fdf16-1e8b-4495-b83a-be41b38fb730/Untitled.png?id=fd3775e3-1de6-4af7-b58d-feb316e81774&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=FKtZo3DNyM6bq-DeKSwV55W_Kz3e1CnrC4fHnNeyG6w&downloadName=Untitled.png" />
+![230922-150336](/posts/4-dom/230922-150336.png)
 
 위 그림처럼 공중에 떠있는 엘리먼트를 확인하기 위해서는 APPEND 해야 합니다. APPEND 를 이용해 실제 웹 페이지 상에도 보이는 것을 확인할 수 있습니다. 이어지는 APPEND 부분에서, `tweetDiv`를 트리 구조에 연결합니다.
 
@@ -136,9 +136,9 @@ const tweetDiv = document.createElement('div')
 container.append(tweetDiv)
 ```
 
-<img src="https://file.notion.so/f/s/c6e2d454-0a43-4d0d-84ae-5f3b3af11210/Untitled.png?id=64496148-04cb-424c-8455-1a731f465652&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=9iMz4r29ZqT-aEnbKhH6JUsqku4QBiJDS_1DOuucXnk&downloadName=Untitled.png" />
+![230922-150359](/posts/4-dom/230922-150359.png)
 
-<img src="https://file.notion.so/f/s/6e41c313-b05c-4a81-a522-1c8984f5e5f4/Untitled.png?id=abba5ae0-677c-42cb-8984-0490a78425e9&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=IX2Z4_wMEug7NGfu4sSQJDc1esjkcdeE4NeyMui0sfs&downloadName=Untitled.png" />
+![230922-150416](/posts/4-dom/230922-150416.png)
 
 ## UPDATE
 
@@ -168,7 +168,7 @@ const container = document.querySelector('#container')
 container.append(oneDiv)
 ```
 
-<img src="https://file.notion.so/f/s/0e5d508b-c7df-49cc-95f7-c0b9451db60d/Untitled.png?id=0eb37e93-794a-4b06-9447-84e435634ebc&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=AOuWbgC41QcYS3NLPut21nRiHIv8qE_MD-2wfQbChwQ&downloadName=Untitled.png" />
+![230922-150442](/posts/4-dom/230922-150442.png)
 
 ## DELETE
 
@@ -183,7 +183,7 @@ container.append(tweetDiv)
 tweetDiv.remove() // 이렇게 append 했던 요소를 삭제할 수 있다.
 ```
 
-<img src="https://file.notion.so/f/s/a3e13e54-a2f8-4e10-90c7-041a1278b5f5/Untitled.png?id=48551d7a-ce9a-4a0c-8154-ed5fafb55eb5&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=VI9G_wYNDVlEKKiR6_9j8ro1gnCiwgkzFbr3qAwHKvw&downloadName=Untitled.png" />
+![230922-150501](/posts/4-dom/230922-150501.png)
 
 여러 개의 자식 요소를 지우려면, 어떻게 해야 할까요? `innerHTML`을 이용하면, 아주 간단하게 모든 자식 요소를 지울 수 있습니다. 컨테이너의 모든 자식 요소를 지우려면, 다음과 같이 입력합니다.
 
@@ -213,4 +213,4 @@ for (let tweet of tweets){
 }
 ```
 
-<img src="https://file.notion.so/f/s/ad82bd65-be7b-4538-a802-0532f1b38bea/Untitled.png?id=27b0db0f-1440-4a11-96a9-6c0b909ebb90&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=OHuEFGZ35V4bAhA3f9U0kfqM9omtjKbXiVVZ4jbQ3uQ&downloadName=Untitled.png" />
+![230922-150517](/posts/4-dom/230922-150517.png)

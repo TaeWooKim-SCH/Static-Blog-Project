@@ -46,7 +46,7 @@ date: 2023-09-18
 
 그렇다면 이런 브라우저 내장 API들은 어디서 오는 것일까요? 사실 현실은 조금 더 복잡합니다.
 
-<img src="https://file.notion.so/f/s/df99da6a-6800-4e58-986a-5a27543311fa/Untitled.png?id=f47e2ffc-aa38-4356-bbdd-2b83bff9c879&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=VGk8xbHwjN8A62H4QfH2SY2JOo71Sx11rphFCdlkltY&downloadName=Untitled.png" />
+![230922-151250](/posts/11-runtimeengine/230922-151250.png)
 
 위 그림은 브라우저에서 동작하는 JavaScript의 런타임 환경을 나타낸 것입니다. JavaScript 엔진 이외에도 JavaScript에 관여하는 다른 요소들이 많습니다. DOM, Ajax, setTimeout과 같이 브라우저에서 제공하는 API들을 Web API라고 합니다.
 
@@ -71,7 +71,7 @@ JavaScript는 콜스택과 메모리힙이라는 메모리 구조를 통해 데�
 
 여기서 중요한 점은 콜스택에 할당되는 변수 식별자 자체는 콜스택 상의 실행 컨텍스트의 렉시컬 환경이라는 곳에 저장됩니다.
 
-<img src="https://file.notion.so/f/s/a0fd2720-e550-4d02-be12-7a213f47d85f/Untitled.png?id=615598d6-1709-4bf8-9869-37ea2fdc8379&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=jXmpRI7JbUv4am6Z9VU2hJo23e2_QwAp5N1Zz5DG6ys&downloadName=Untitled.png" />
+![230922-151306](/posts/11-runtimeengine/230922-151306.png)
 
 ### 호출 스택(Call Stack)
 
@@ -94,7 +94,7 @@ printSquare(5);
 
 처음 엔진이 이 코드를 실행하는 시점에는 호출 스택이 비어있습니다. 하지만 코드가 실행되면서 호출 스택은 아래와 같이 변합니다.
 
-<img src="https://file.notion.so/f/s/f7fe9dbd-7902-409a-9981-64fc0c9d5a01/Untitled.png?id=e5947c31-9002-4972-95cf-da2d4e025b10&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=ZaKYf2pJQQ3RL3a7pJ3qaxwLWg-q-whIhEch1yTpKJI&downloadName=Untitled.png" />
+![230922-151324](/posts/11-runtimeengine/230922-151324.png)
 
 호출 스택의 각 단계를 스택 프레임(Stack Frame)이라고 합니다.
 
@@ -118,7 +118,7 @@ start();
 
 위 코드가 foo.js에 있다고 가정하고 크롬에서 실행하면
 
-<img src="https://file.notion.so/f/s/5113eee4-c1b3-4eb1-b5a2-769dddb0713e/Untitled.png?id=8bdded50-7492-440d-bdd5-c27b35a0f207&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=xuP1MVjzmfKZLHjZQ2UM9m6JEHbHm4onHldsFs8tO60&downloadName=Untitled.png" />
+![230922-151341](/posts/11-runtimeengine/230922-151341.png)
 
 이렇게 나오게 됩니다. 호출 스택이 최대 크기가 되면 ‘스택 날려버리기’가 일어납니다. 이는 반복문 코드를 광범위하게 테스트하지 않고 실행했을 때 자주 발생합니다.
 
@@ -132,11 +132,11 @@ foo();
 
 엔진에서 이 코드를 실행할 때, foo()에 의해서 foo 함수가 호출됩니다. 그런데 여기서 foo 함수가 반복적으로 자신을 다시 호출하는 재귀 호출을 수행합니다. 그러면 매번 수행할 때마다 호출 스택에 foo()가 쌓이게 됩니다. 아래와 같이 말이죠.
 
-<img src="https://file.notion.so/f/s/c8722d0b-ede4-44bd-9df4-38c00c5f2a3c/Untitled.png?id=24c8b2ae-d32f-441a-bdb5-b234653b70ce&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=-Pz5eAQ11ONI4mewwokZ-TxOe2J2jlhvI9MbLJ1MW3Q&downloadName=Untitled.png" />
+![230922-151356](/posts/11-runtimeengine/230922-151356.png)
 
 그러다가 특정 시점에 함수 호출 횟수가 호출 스택의 최대 허용치를 넘게 되면 브라우저가 아래와 같은 에러를 발생시킵니다.
 
-<img src="https://file.notion.so/f/s/7ec99876-0fd1-45ef-9a9b-870e306a7578/Untitled.png?id=6e7f98a6-7ca9-43ea-bae2-702d24ebc07b&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=EqPtjH2pFZRXoB2JkXeXo8V9w51zivMPfBAAIkWxtwA&downloadName=Untitled.png" />
+![230922-151411](/posts/11-runtimeengine/230922-151411.png)
 
 싱글 스레드 기반 코딩은 멀티 스레드 환경에서 제기되는 복잡한 문제나 시나리오를 고민하지 않아도 되기 때문에 상당히 쉽습니다. 예를 들면, 데드락 같은 것이 있습니다.
 
@@ -154,7 +154,7 @@ foo();
 
 문제는 이 뿐만이 아닙니다. 브라우저가 호출 스택의 정말 많은 작업들을 처리하다 보면 화면이 오랫동안 응답하지 않게 됩니다. 이 경우에 대부분의 브라우저가 아래와 같은 에러를 띄우면서 페이지를 종료할 것인지 물어봅니다.
 
-<img src="https://file.notion.so/f/s/43b3e431-0dce-4f02-a0cc-2db025fa70e3/Untitled.png?id=28b12e91-1676-41ac-8ad7-019d931da952&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695196800000&signature=8S2o7zC0P9AVM9r_vymOKlImC-MBlb3u_2Tqb8GqjAU&downloadName=Untitled.png" />
+![230922-151427](/posts/11-runtimeengine/230922-151427.png)
 
 이는 사용자 경험(UX)에 있어 최악이라고 할 수 있습니다.
 
@@ -174,7 +174,7 @@ Just In Time으로 실시간(런타임) 컴파일 기법이라고 합니다.
 
 ### JIT가 컴파일도 하고 인터프리터랑 같이 쓰인다는 건 OK. 그래서 누가 쓰는데요?
 
-<img src="https://file.notion.so/f/s/60a65367-eb36-45ad-93d6-583d397cd581/Untitled.png?id=16557782-39b2-4c8c-a58b-564cb245ad51&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695204000000&signature=9-4K8Wgt9kPwKwhrZKz6_pSo3HKNdezAJlGSyVss-Dw&downloadName=Untitled.png" />
+![230922-151437](/posts/11-runtimeengine/230922-151437.png)
 
 - Java가 이 컴파일러를 사용합니다.
 
@@ -202,7 +202,7 @@ JavaScript 엔진은 로드된 스크립트를 해석, 실행하는 역할입니
 
 엔진이 코드를 해석하는 과정은 다음과 같습니다. (해석하는 과정을 컴파일레이션이라고 합니다.)
 
-<img src="https://file.notion.so/f/s/f33d8b62-4ddc-4d96-a01f-b4650c78a7c9/Untitled.png?id=c7727b44-53dd-409e-a9de-2adb18b93a70&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695204000000&signature=DWDZGQUviNoORMkMHUPGWh5wF9SkCzHA5Xh8ZMsUG7k&downloadName=Untitled.png" />
+![230922-151453](/posts/11-runtimeengine/230922-151453.png)
 
 엔진은 텍스트 형식인 코드를 실행하기 전 컴파일 과정을 거칩니다. 컴파일은 총 3개의 단계로 이루어져 있습니다.
 
@@ -218,7 +218,7 @@ JavaScript 엔진은 로드된 스크립트를 해석, 실행하는 역할입니
 
 Ignition이라는 인터프리터가 바이트 코드를 만들고 실행함으로써 코드가 동작됩니다.
 
-<img src="https://file.notion.so/f/s/e82905d8-2b77-4b1a-95ab-7aa7f2b24226/Untitled.png?id=e257e215-9a83-4dd6-9f50-206244a92952&table=block&spaceId=4f129cb2-a39f-45b1-9039-9f7e5c0b105d&expirationTimestamp=1695204000000&signature=_BWxCGTUUH78laHBgyo99sTNc2ZNeiJss5UMB0kAPUw&downloadName=Untitled.png" />
+![230922-151509](/posts/11-runtimeengine/230922-151509.png)
 
 ## Reference
 
