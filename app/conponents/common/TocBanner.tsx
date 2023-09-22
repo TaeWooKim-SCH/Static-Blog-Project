@@ -3,6 +3,7 @@
 import { BiLink } from 'react-icons/bi';
 import { HiMiniArrowUturnUp } from 'react-icons/hi2';
 import { HiChevronRight } from 'react-icons/hi';
+import ChangeTheme from './ChangeTheme';
 
 export default function TocBanner({ headings }: PropsType) {
   const copyLinkHandler = () => {
@@ -34,13 +35,14 @@ export default function TocBanner({ headings }: PropsType) {
           ))}
         </ul>
       </div>
-      <div className="flex items-center justify-between p-4 bg-neutral-200 dark:bg-neutral-700">
-        <button onClick={copyLinkHandler}>
-          <BiLink className="dark:fill-[#a1a1a1]" size="25" />
+      <div className="flex items-center justify-end p-4 bg-neutral-200 dark:bg-neutral-700">
+        <button className="w-9 h-9 mr-auto rounded-[5px] hover:bg-gray-300 dark:hover:bg-[#262626]" onClick={copyLinkHandler}>
+          <BiLink className="dark:fill-[#a1a1a1] mx-auto" size="25" />
         </button>
-        <button onClick={topScrollHandler}>
-          <HiMiniArrowUturnUp className="dark:fill-[#a1a1a1]" size="20" />
+        <button className="w-9 h-9 rounded-[5px] hover:bg-gray-300 dark:hover:bg-[#262626]" onClick={topScrollHandler}>
+          <HiMiniArrowUturnUp className="dark:fill-[#a1a1a1] mx-auto" size="20" />
         </button>
+        <ChangeTheme />
       </div>
     </div>
   );

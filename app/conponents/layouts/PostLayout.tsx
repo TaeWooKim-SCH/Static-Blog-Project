@@ -39,7 +39,7 @@ export default function PostLayout({ post }: any) {
           <Image className="w-24 h-24 rounded-full mr-8" src="/blogImgs/profile.jpg" alt="프로필 사진" width={100} height={100} />
           <div>
             <div className="font-bold dark:text-[#dddddd]">TaeWoo Kim</div>
-            <div className="text-[#a1a1a1] mb-2">Junior Frontend Engineer</div>
+            <div className="text-[#838383] mb-2">Junior Frontend Engineer</div>
             <AuthorContacts />
           </div>
         </div>
