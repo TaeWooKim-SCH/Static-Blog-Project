@@ -9,7 +9,7 @@ export default function LinkArrow({
   return (
     <Link
       href={href ?? '/'}
-      className={`inline-flex text-[#7e7e7e] hover:text-[#2b2b2b] dark:hover:text-[#dddddd] transition-all ${className}`}
+      className={`inline-flex group text-[#7e7e7e] hover:text-[#2b2b2b] dark:hover:text-[#dddddd] transition-all ${className}`}
       target={target && target}
     >
       { children }
@@ -17,10 +17,10 @@ export default function LinkArrow({
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        className="ml-1 h-6 w-6 pt-1 hover:stroke-[##2b2b2b]"
+        className="ml-1 h-6 w-6 pt-1"
       >
         <path
-        className="stroke-[#7e7e7e] hover:stroke-[##2b2b2b]"
+        className="stroke-[#7e7e7e] group-hover:stroke-[#2b2b2b] dark:group-hover:stroke-[#dddddd] transition-all"
           // stroke="#7e7e7e"
           strokeLinecap="round"
           strokeLinejoin="round"

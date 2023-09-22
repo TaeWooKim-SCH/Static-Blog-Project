@@ -31,10 +31,10 @@ export default function TocBanner({ headings }: PropsType) {
             ) : (
               <li className="py-1 ml-2" key={idx}>
                 <a
-                  className="flex items-center hover:drop-shadow-2xl dark:text-[#a7a7a7] dark:hover:text-[#dddddd] text-xs"
+                  className="flex items-center group hover:drop-shadow-2xl dark:text-[#a7a7a7] dark:hover:text-[#dddddd] text-xs"
                   href={`#${head.slug}`}
                 >
-                  <HiChevronRight className="dark:fill-[#a1a1a1]" /> {head.text}
+                  <HiChevronRight className="dark:fill-[#a1a1a1] dark:group-hover:fill-[#dddddd]" /> {head.text}
                 </a>
               </li>
             )
