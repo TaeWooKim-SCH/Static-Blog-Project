@@ -8,8 +8,8 @@ import MoonIcon from "../icons/MoonIcon";
 
 export default function HeaderNav() {
   const navKind = [['blog', 'Blog'], ['snippets', 'Snippets'], ['archives', 'Archives']];
-  const { theme, themeChangeLight, themeChangeDark } = useChangeTheme();
-
+  const { isthemeDark, theme, themeChangeLight, themeChangeDark } = useChangeTheme();
+  console.log(theme);
   return (
     <nav className="py-12 flex justify-between items-center">
       <div className="flex ">
@@ -25,7 +25,7 @@ export default function HeaderNav() {
         ))}
       </div>
       <div>
-        {theme === 'light' ? (
+        {!isthemeDark ? (
           <button className="h-9 w-9 transition-all hover:bg-gray-200 rounded-[5px] dark:hover:bg-[#262626]" onClick={themeChangeDark}>
             <SunIcon className="fill-yellow-400" width={36} height={36} />
           </button>
