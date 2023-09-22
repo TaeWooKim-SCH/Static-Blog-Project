@@ -9,7 +9,7 @@ export default function Mdx({ data }: PageProps) {
   const MdxComponent = useMDXComponent(data);
 
   return (
-    <div className="w-[1000px] prose">
+    <div className="w-full max-w-3xl prose">
       <MdxComponent />
     </div>
   );

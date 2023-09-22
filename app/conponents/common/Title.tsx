@@ -2,7 +2,7 @@ export default function Title({ children, className, ...props }: React.Component
   return (
     <h1
       {...props}
-      className={`mb-4 text-5xl font-extrabold dark:text-[#dddddd] ${className}`}
+      className={`mb-4 text-5xl font-extrabold dark:text-[#dddddd] leading-snug ${className}`}
     >{ children }</h1>
   );
 }
