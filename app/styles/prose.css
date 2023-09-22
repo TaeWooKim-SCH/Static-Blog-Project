@@ -1,7 +1,23 @@
-h1, h2, h3, h4, h5, li, ul, p, code, td, th {
-  @apply dark:text-white;
+h1, h2, h3, h4, h5, li, ul, p, td, th, strong {
+  @apply dark:text-[#dddddd];
 }
 
 a {
   @apply dark:text-[#757575];
+}
+
+aside {
+  @apply bg-[#cacaca] dark:bg-[#252525] p-4 mb-5 rounded-lg;
+}
+
+code:not(pre code)::after {
+  display: none;
+}
+
+code:not(pre code)::before {
+  display: none;
+}
+
+code:not(pre code) {
+  @apply text-[#EB5757] bg-[#87837826] rounded-md px-[5px] py-[2px]
 }

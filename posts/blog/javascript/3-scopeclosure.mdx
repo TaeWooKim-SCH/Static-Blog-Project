@@ -9,13 +9,13 @@ tags:
 date: 2023-09-18
 ---
 
-# Execution Context
+## Execution Context
+
+---
 
 JavaScript코드를 실행시키면 JavaScript 엔진은 call stack이라는 통에 전역 실행 컨텍스트를 담습니다.
 
-## Record로 JS Hoisting 이해하기
-
----
+### Record로 JS Hoisting 이해하기
 
 ```jsx
 console.log(TVChannel); // undefined
@@ -59,9 +59,7 @@ let 또는 const일 때에는 엔진이 TVChannel 식별자를 기록해두긴 �
 
 </aside>
 
-## Outer로 JS Scope Chaining 이해하기
-
----
+### Outer로 JS Scope Chaining 이해하기
 
 Outer의 정식 명칭은 Outer Environment Referece 외부 환경 참조입니다.
 
@@ -83,23 +81,21 @@ Outer의 정식 명칭은 Outer Environment Referece 외부 환경 참조입니�
 
 이렇게 식별자를 결정할 때 활용하는 스코프들의 연결 리스트를 Scope Chain이라고 합니다. 그리고 식별자를 결정하기 위해 Scope chain을 이용해 찾아나가는 과정을 Scope Chaining이라고 합니다.
 
-## Execution Context 정리
-
----
+### Execution Context 정리
 
 Execution Context란 코드를 실행하는데 필요한 환경을 제공하는 객체입니다. 여기서 환경이란 코드 실행에 영향을 주는 조건이나 상태를 말합니다. 
 
 따라서 이 조건이나 상태를 모아둔 객체가 바로 Execution Context입니다.
 
-# Scope
+## Scope
+
+---
 
 JavaScript의 Scope란 변수나 함수의 유효 범위를 의미합니다. 즉, 해당 변수나 함수에 접근할 수 있는 범위를 말합니다.
 
 JavaScript에서는 크게 전역 범위(Global Scope)와 지역 범위(Local Scope)로 나뉩니다.
 
-## 전역 범위(Global Scope)
-
----
+### 전역 범위(Global Scope)
 
 전역 범위란 함수 바깥에서 선언된 변수나 함수를 의미합니다. 이러한 변수나 함수는 어디서든 접근할 수 있습니다.
 
@@ -113,9 +109,7 @@ function globalFunction() {
 
 위의 코드에서 `globalVar`와 `globalFunction`은 전역 범위에 선언되었습니다. 따라서 어디서든 접근할 수 있습니다.
 
-## 지역 범위(Local Scope)
-
----
+### 지역 범위(Local Scope)
 
 지역 범위란 함수 안에서 선언된 변수나 함수를 의미합니다. 이러한 변수나 함수는 해당 함수 내부에서만 접근할 수 있습니다.
 
@@ -131,7 +125,7 @@ console.log(localVar); // ReferenceError: localVar is not defined
 
 위의 코드에서 `localVar`는 `localFunction` 안에서 선언되었습니다. 따라서 해당 함수 안에서만 접근할 수 있으며, 함수 바깥에서는 접근할 수 없습니다.
 
-## 변수의 호이스팅(Hoisting)
+### 변수의 호이스팅(Hoisting)
 
 JavaScript에서는 변수의 선언이 해당 변수의 범위(scope)의 맨 위로 끌어올려지는 현상을 호이스팅(hoisting)이라고 합니다.
 
@@ -142,26 +136,22 @@ var myVar = 'I am a hoisted variable';
 
 위의 코드에서 `myVar`는 선언되기 전에 출력되었습니다. 이는 `var myVar` 선언이 해당 범위의 맨 위로 끌어올려졌기 때문입니다.
 
-# Closure
-
-## **클로저(Closure)란?**
+## Closure
 
 ---
+
+### 클로저(Closure)란?
 
 - 클로저는 함수와 그 함수가 접근할 수 있는 변수의 조합입니다.
 - 클로저를 통해 함수 내부의 변수와 함수를 외부에서 접근할 수 있게 됩니다.
 
-## **클로저를 사용하는 이유**
-
----
+### 클로저를 사용하는 이유
 
 - 변수를 보호하고 정보를 은닉할 수 있습니다.
 - 함수에서 생성된 데이터를 보관하고 접근할 수 있습니다.
 - 콜백 함수에서 외부 변수를 참조할 수 있습니다.
 
-## **클로저의 구조**
-
----
+### 클로저의 구조
 
 ```jsx
 function outer() {
@@ -180,9 +170,7 @@ closureFunc(); // 'inner scope'와 'outer scope' 출력
 
 위 코드에서 **`inner`** 함수는 **`outer`** 함수의 지역 변수 **`outerVar`**와 ```````````````````````inner```````````````````````함수의 지역 변수 **`innerVar`**를 사용합니다. **`inner`** 함수를 리턴하는 **`outer`** 함수는 클로저를 형성하게 됩니다.
 
-## 데이터를 보존하는 함수
-
----
+### 데이터를 보존하는 함수
 
 데이터를 보존하는 함수를 직접 만들어보겠습니다. 레시피를 제작하는 `createFoodRecipe` 함수를 만들어봅시다. 
 
@@ -222,9 +210,7 @@ highballRecipe('토닉워터', '연태고량주'); // '토닉워터 + 연태고�
 
 `highballRecipe` 함수는 문자열 `‘하이볼’` 을 보존하고 있어서 전달인자를 추가로 전달할 필요가 없고, 다양한 하이볼 레시피를 하나의 함수로 제작할 수 있었습니다.
 
-## 커링
-
----
+### 커링
 
 커링은 **여러 전달인자를 가진 함수**를 **함수를 연속적으로 리턴하는 함수**로 변경하는 행위입니다. 예시를 먼저 보겠습니다.
 
@@ -244,9 +230,7 @@ function currySum(a) {
 console.log(sum(10, 20) === currySum(10)(20)) // true
 ```
 
-## 모듈 패턴
-
----
+### 모듈 패턴
 
 JavaScript에 `class` 키워드가 없던 시절 모듈 패턴을 구현하기 위해서 클로저를 사용했습니다. 모듈은 하나의 기능을 온전히 수행하기 위한 모든 코드를 가지고 있는 코드 모음으로, 하나의 단위로서 역할을 합니다. 모듈은 다른 모듈에 의존적이지 않고 독립적이어야 합니다.
 
@@ -291,9 +275,7 @@ cal.display(); // 1
 console.log(displayValue) // ReferenceError: displayValue is not defined
 ```
 
-## **클로저 사용 예시**
-
----
+### 클로저 사용 예시
 
 - 정보 은닉
 

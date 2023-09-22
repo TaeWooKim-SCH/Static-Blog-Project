@@ -2,6 +2,7 @@
 
 import { BiLink } from 'react-icons/bi';
 import { HiMiniArrowUturnUp } from 'react-icons/hi2';
+import { HiChevronRight } from 'react-icons/hi';
 
 export default function TocBanner({ headings }: PropsType) {
   const copyLinkHandler = () => {
@@ -20,9 +21,15 @@ export default function TocBanner({ headings }: PropsType) {
         <ul className="mt-2 text-sm">
           {headings.map((head, idx) => (
             head.level === 1 || head.level === 2 ? (
-              <li className="py-1 dark:text-[#dddddd]" key={idx}><a href={`#${head.slug}`}>{head.text}</a></li>
+              <li className="py-1" key={idx}>
+                <a className="dark:text-[#dddddd]" href={`#${head.slug}`}>{head.text}</a>
+              </li>
             ) : (
-              <li className="py-1 ml-4 dark:text-[#dddddd]" key={idx}><a href={`#${head.slug}`}>{'>'} {head.text}</a></li>
+              <li className="py-1 ml-2" key={idx}>
+                <a className="flex items-center dark:text-[#dddddd] text-xs" href={`#${head.slug}`}>
+                  <HiChevronRight className="dark:fill-[#dddddd]" /> {head.text}
+                </a>
+              </li>
             )
           ))}
         </ul>
