@@ -20,7 +20,7 @@ export default function PostLayout({ post }: any) {
       <div className="flex relative gap-8 w-full">
         <Mdx data={post.body.code} />
         <div className="ml-auto">
-          <div className="sticky top-[120px] min-w-[240px] max-w-[260px]">
+          <div className="sticky top-[50px] min-w-[240px] max-w-[260px]">
             <TocBanner headings={post.headings} />
           </div>
         </div>

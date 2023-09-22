@@ -7,6 +7,7 @@ const disabledCss = {
 	'blockquote p:last-of-type::after': false,
 	code: false,
 	'pre code': false,
+  'hr': false
 }
 
 /** @type {import('tailwindcss').Config} */
