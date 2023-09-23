@@ -48,7 +48,7 @@ export default async function SeriesPage({ params }: PageProps) {
     <Layout>
       <main className="relative pb-16">
         <section>
-          <div className="grid gap-8 grid-cols-3 sm:gap-32">
+          <div className="grid grid-cols-1 md:gap-8 md:grid-cols-3">
             <div className="p-10">
               <div className="relative mx-auto h-[336px] w-[240px] select-none rounded-lg bg-neutral-200 px-11 pb-16 pt-12 dark:bg-neutral-800">
                 <div className="absolute inset-y-0 left-4 w-[1px] bg-neutral-50 dark:bg-neutral-700"></div>
