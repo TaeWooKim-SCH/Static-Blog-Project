@@ -4,7 +4,7 @@ import AuthorContacts from "../common/AuthorContacts";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto max-w-[1100px] px-6 lg:px-0">
+    <div className="mx-auto max-w-[1100px] px-6">
       <HeaderNav />
       {/* --- */}
       <main className="pb-16">{children}</main>

@@ -11,7 +11,7 @@ export default async function Blog() {
       <div>
         <div className="text-[#555555] dark:text-[#dddddd]">개발하며 알게된 것들을 기록하는 공간입니다.</div>
 
-        <div className="flex items-center space-x-6 pt-12 no-scrollbar">
+        <div className="flex items-center space-x-6 py-12 overflow-scroll scrollbar-hide">
           {filteredSeriesBook.map((post, idx) => (
             <div key={idx}>
               <a href={post.slug}>
@@ -29,7 +29,7 @@ export default async function Blog() {
           <span className="pt-3 ml-2 text-lg font-bold dark:text-[#dddddd]">{'('}{AllBlogPost.length}{')'}</span>
         </div>
 
-        <div className="grid gap-8 grid-cols-2 mt-12">
+        <div className="grid gap-8 grid-cols-1 md:grid-cols-2 mt-12">
           {AllBlogPost.map((post, idx) => (
             <PostListItem post={post} key={idx} />
           ))}

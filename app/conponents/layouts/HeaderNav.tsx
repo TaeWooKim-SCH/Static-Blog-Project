@@ -6,7 +6,7 @@ export default function HeaderNav() {
   const navKind = [['blog', 'Blog'], ['snippets', 'Snippets'], ['archives', 'Archives']];
 
   return (
-    <nav className="py-12 flex justify-between items-center sm:w-[80%]">
+    <nav className="py-12 flex justify-between items-center">
       <div className="flex ">
         <NavItem className="mr-3" href="/">
           <LogoIcon width={40} />
