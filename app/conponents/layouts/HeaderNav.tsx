@@ -1,23 +1,12 @@
-'use client'
-
-import { useEffect, useState } from "react";
-
 import LogoIcon from "../icons/LogoIcon";
 import NavItem from "../common/NavItem";
-import useChangeTheme from "@/app/libs/useChangeTheme";
-import SunIcon from "../icons/SunIcon";
-import MoonIcon from "../icons/MoonIcon";
 import ChangeTheme from "../common/ChangeTheme";
 
 export default function HeaderNav() {
-  const [mounted, setMounted] = useState(false); // 마운트 때 처리를 안해주면 왜 해로 뜰까?
   const navKind = [['blog', 'Blog'], ['snippets', 'Snippets'], ['archives', 'Archives']];
-  const { isthemeDark, themeChangeLight, themeChangeDark } = useChangeTheme();
-
-  useEffect(() => setMounted(true), []);
 
   return (
-    <nav className="py-12 flex justify-between items-center">
+    <nav className="py-12 flex justify-between items-center sm:w-[80%]">
       <div className="flex ">
         <NavItem className="mr-3" href="/">
           <LogoIcon width={40} />

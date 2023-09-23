@@ -38,7 +38,7 @@ export default function FeaturePosts() {
         <SubTitle>Featured Posts</SubTitle>
       </div>
       <AnimatePresence>
-        <motion.div className="grid gap-6 grid-cols-4" initial={animate.initial} animate={animate.animate} exit={animate.exit}>
+        <motion.div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4" initial={animate.initial} animate={animate.animate} exit={animate.exit}>
           <PostItem
             href="/blog/nextjs/1-nextblog"
             imgUrl={unsplashImgList[0]}
