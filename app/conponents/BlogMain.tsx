@@ -7,17 +7,17 @@ import PostListItem from "./common/PostListItem";
 import useSearch from "../libs/useSearch";
 
 export default function BlogMain() {
-  const { searchValue, searchHandler } = useSearch();
+  // const { searchValue, searchHandler } = useSearch();
   
-  const filteredBlogPost = AllBlogPost.filter((post) => post.title.includes(searchValue));
-  console.log(filteredBlogPost);
+  // const filteredBlogPost = AllBlogPost.filter((post) => post.title.includes(searchValue));
+  // console.log(filteredBlogPost);
 
   return (
     <div>
         <div className="text-[#555555] dark:text-[#dddddd]">개발하며 알게된 것들을 기록하는 공간입니다.</div>
 
         <div className="mt-5">
-          <SearchBarInput onChange={searchHandler} />
+          <SearchBarInput />
         </div>
 
         <div className="flex items-center space-x-6 py-12 overflow-scroll scrollbar-hide">
@@ -34,12 +34,12 @@ export default function BlogMain() {
         </div>
         
         <div className="mt-16 flex">
-          <SubTitle>{searchValue ? 'Filtered Posts' : 'All Posts'}</SubTitle>
-          <span className="pt-3 ml-2 text-lg font-bold dark:text-[#dddddd]">{'('}{filteredBlogPost.length}{')'}</span>
+          <SubTitle>{'All Posts'}</SubTitle>
+          <span className="pt-3 ml-2 text-lg font-bold dark:text-[#dddddd]">{'('}{AllBlogPost.length}{')'}</span>
         </div>
 
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2 mt-12">
-          {filteredBlogPost.map((post, idx) => (
+          {AllBlogPost.map((post, idx) => (
             <PostListItem post={post} key={idx} />
           ))}
         </div>
