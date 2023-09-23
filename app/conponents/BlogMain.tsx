@@ -1,10 +1,7 @@
-'use client'
-
 import { AllBlogPost, filteredSeriesBook } from "../libs/dataset";
 import SubTitle from "./common/SubTitle";
 import SearchBarInput from "./common/SearchBarInput";
 import PostListItem from "./common/PostListItem";
-import useSearch from "../libs/useSearch";
 
 export default function BlogMain() {
   // const { searchValue, searchHandler } = useSearch();
