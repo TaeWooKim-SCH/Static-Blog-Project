@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import LinkArrow from "./common/LinkArrow";
 import PostItem from "./common/PostItem";
 import SubTitle from "./common/SubTitle";
+import Hr from "./common/Hr";
 
 const animate = {
   initial :{ 

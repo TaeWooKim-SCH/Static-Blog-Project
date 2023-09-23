@@ -3,11 +3,13 @@ import Title from "../conponents/common/Title";
 import { AllBlogPost, filteredSeriesBook } from "../libs/dataset";
 import SubTitle from "../conponents/common/SubTitle";
 import PostListItem from "../conponents/common/PostListItem";
+import Hr from "../conponents/common/Hr";
 
 export default async function Blog() {
   return (
     <Layout>
       <Title>Blog</Title>
+
       <div>
         <div className="text-[#555555] dark:text-[#dddddd]">개발하며 알게된 것들을 기록하는 공간입니다.</div>
 
@@ -26,7 +28,7 @@ export default async function Blog() {
       
         <div className="mt-16 flex">
           <SubTitle>{'All Posts'}</SubTitle>
-          <span className="pt-3 ml-2 text-lg font-bold dark:text-[#dddddd]">{'('}{AllBlogPost.length}{')'}</span>
+          <span className="pt-[0.4rem] lg:pt-3 ml-2 lg:text-lg font-bold dark:text-[#dddddd]">{'('}{AllBlogPost.length}{')'}</span>
         </div>
 
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2 mt-12">

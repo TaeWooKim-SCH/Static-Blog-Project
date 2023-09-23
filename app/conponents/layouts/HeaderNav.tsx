@@ -3,13 +3,13 @@ import NavItem from "../common/NavItem";
 import ChangeTheme from "../common/ChangeTheme";
 
 export default function HeaderNav() {
-  const navKind = [['blog', 'Blog'], ['snippets', 'Snippets'], ['archives', 'Archives']];
+  const navKind = [['blog', 'Blog'], ['snippets', 'Snippets']];
 
   return (
     <nav className="py-12 flex justify-between items-center">
       <div className="flex ">
         <NavItem className="mr-3" href="/">
-          <LogoIcon width={40} />
+          <LogoIcon className="p-2" width={40} />
         </NavItem>
         {navKind.map((kind) => (
           <NavItem
