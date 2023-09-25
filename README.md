@@ -1,4 +1,4 @@
-# Static Blog Project (2023.09.14~)
+# Static Blog Project (2023.09.14~2023.09.23)
 Next.js 13버전으로 정적 블로그를 만드는 프로젝트입니다. <br />
 <a href='https://2023-taewoo-blog.vercel.app' target="_blank">배포링크</a>
 
