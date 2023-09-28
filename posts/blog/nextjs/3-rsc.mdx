@@ -1,0 +1,158 @@
+---
+title: '[Next.js] rsc란 무엇일까?'
+description: 'Next.js 13버전부터 도입된 rsc에 대해 알아봅시다.'
+date: '2023-09-28'
+tags :
+  - next.js
+  - ssr
+  - ssg
+  - rsc
+---
+
+<img src="/blogImgs/NextJS.png" />
+
+## 들어가기전에
+---
+Next.js로 블로그를 만들고 배포를 하고 나니 의문이 생겼다. <br/>
+배포한 사이트에 들어가 Network 탭을 보니 이상한 점이 있었다. <br/>
+나는 분명 SSG로 사이트를 만들었지만 사이트에서는 정적 생성된 html을 받아오지 않고 rsc라는 이상한 데이터를 받아오고 있었다. <br/>
+그래서 이 rsc가 도대체 뭔데?라는 생각이 들어 알아보게 되었다. <br/>
+
+알고보니 rsc는 놀랍게도 Next.js 13버전을 사용하면 자주 접했던 React Server Component의 약자였다...<br/>
+Next.js 13에서 ```app``` directory를 채택하면서 RSC를 지원하기로 했고, 23년 5월 5일에 릴리즈된 Next.js 13.4부터 모든 컴포넌트가 ```'use client'```를 사용하지 않으면 기본적으로 RSC가 되었다. <br/>
+
+이제 이 RSC가 제대로 무엇인지 왜 RSC를 사용하는지 정리해보려고 한다.
+
+
+## RSC란?
+---
+React 18 전까지만 해도 react에서 페이지를 렌더링하는 방식은 모두 csr이었다. <br/>
+Next.js는 애플리케이션을 page 단위로 나눈 뒤 서버에서 HTML 페이지를 미리 렌더링한 뒤 React로 클라이언트 단에서 hydrated하는 방식을 가능하도록 했다. <br/>
+여기서 hydrated는 Server Side에서 렌더링 된 정적 페이지와 번들링된 js 파일을 클라이언트에게 보낸 뒤, 클라이언트에서 HTML 코드와 React 코드인 JS 코드를 서로 매칭시키는 과정을 말한다. <br/>
+잠시 React.js와 Next.js 페이지 구성 원리에 대해 알아보고 가자.
+
+### React.js의 웹 페이지 구성 원리
+React는 JS 파일만으로 웹 화면을 구성하는 방식을 채택하고 있다. 그래서 실제 HTML 코드는 안에 내용이 하나도 없는 상태이다. (Client Side Rendering이 SEO에 적합하지 않은 이유이기도 하다.)
+
+```html
+// public/index.html
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+```
+
+위 코드는 처음 리액트 프로젝트를 생성하면 보게되는 익숙한 HTML 코드이다. <br/>
+단순 뼈대만 있는 HTML과 JS 파일들을 클라이언트로 모두 보낸 뒤, 클라이언트 측에서 JS 코드들을 통해 렌더링하며 페이지를 그린다. <br/>
+웹 페이지 렌더링을 한 뒤에도 페이지 내에서 동작하는 모든 이벤트 또한 자바스크립트로 인해 일어나게 된다. <br/>
+
+```js
+// src/index.js
+
+import React from "react";
+import ReactDOM from "react-dom";
+import App from './src/App';
+
+ReactDOM.render(<App />, document.getElementById("root"));
+```
+위 코드처럼 public/index.html에는 아무 내용없는 기본 뼈대만 있고, 나머지는 src/index.js의 JS 코드에서 모든 화면을 렌더링 한 뒤 HTML DOM 요소 중 root라는 아이디를 가진 엘리멘트를 찾아 하위로 계속 주입한다.
+
+### Next.js의 웹 페이지 구성 원리
+
+Next.js는 클라이언트에 웹 페이지를 보내기 전에 Server Side에서 미리 웹 페이지를 Pre-Rendering한다. 그리고 Pre-Rendering으로 인해 생성된 HTML을 클라이언트에 전송한다. <br/>
+그런데 이 시점에 중요한 것은 아래 내용이다. <br/>
+
+현재 클라이언트가 받은 웹 페이지는 단순히 웹 화면만 보여주는 HTML일 뿐이고, JS 요소들이 하나도 없는 상태이다.
+이는 화면을 보여주고 있지만, 특정 JS 모듈 뿐만 아니라 단순 클릭과 같은 이벤트 리스너들이 각 웹 페이지의 DOM 요소에 하나도 적용되어 있지 않은 상태임을 말한다. <br/>
+
+그렇다면 도대체 어떻게 뼈대밖에 없는 이 페이지를 어떻게 동작하게 되는 것일까? <br/>
+
+Next.js Server에서는 Pre-Rendering된 웹 페이지를 클라이언트에게 보내고 바로 리액트가 번들링된 JS 코드들을 클라이언트에 전송한다. <br/>
+브라우저 Network 탭을 보면, 맨 처음 document Type의 파일을 받고 이후에 번들링된 JS 파일들이 Chunk 단위로 로드되는 것을 확인할 수 있다. <br/>
+그리고 이 번들링된 JS 코드들이 이전에 보내진 HTML DOM 요소 위에서 한 번 더 렌더링을 하면서 자기 자리를 찾아가며 매칭이 된다. <br/>
+그렇다. 이 과정이 바로 **Hydrate**이다. <br/>
+이것은 마치 자바스크립트 코드들이 DOM 요소 위에 물을 채우 듯 필요로 하던 요소들을 채운다 하여 Hydrate(수화)라는 용어를 쓴다고 한다. <br/>
+
+하지만 이 방식은 HTML 페이지가 상호작용이 가능하도록 하기까지 추가적인 JS의 로딩이 필요하게 됐다. <br/>
+이를 보완하기 위해 등장한 개념이 바로 RSC이다. RSC는 Client와 Server의 장점을 모두 채택한 새로운 개념이다. <br/>
+RSC는 서버에서 한 차례 렌더링을 거친 뒤 클라이언트로 전달하게 되는 방식이다.
+
+
+## RSC를 사용하는 이유
+---
+RSC가 무엇인지는 알겠는데 서버에서 한 차례 렌더링을 거친다고 뭐가 달라지는 걸까?
+
+RSC는 개발자로 하여금 Server 인프라를 보다 효과적으로 활용할 수 있도록 한다.
+데이터를 가져오는 동작을 서버 단으로 이동해 데이터베이스에 가깝게 하면서, 클라이언트 JS 번들의 dependency를 유지하여 성능을 향상시킬 수 있다.
+
+RSC의 활용을 통해 로딩 속도는 빨라지고, 클라이언트 측의 JS 번들 크기는 축소된다.
+이로써 기본 클라이언트 측의 런타임은 애플리케이션 크기 증가에 따라 증가하지 않는다.
+오직 클라이언트 측에서 필요한 경우에만 추가적인 JS가 추가된다.
+
+Next.js에서 App Router가 안정된 단계로 돌입하고 릴리즈되면서, 모든 컴포넌트는 기본적으로 RSC가 되었다.
+그러나 무조건 SSR이 아닌 SSR과 CSR의 장점을 모두 가지고 있으므로 client component도 같이 잘 사용해야 한다.
+
+
+## RSC는 언제 사용해야 할까?
+---
+그렇다면 RSC는 언제 사용하면 되는 걸까?
+![230928-154149](/posts/3-rsc/230928-154149.png)
+위에 표를 간단히 요약하면 말 그대로 SSR의 장점이 필요한 곳에서는 RSC, CSR의 장점이 필요한 곳에서는 Client Component를 활용하라고 한다.
+
+
+## RSC의 장점
+---
+### Zero Bundle Size
+RSC는 서버에서 이미 렌더링된 다음 클라이언트에 직렬화된 형태로 전달되기 때문에 클라이언트 측에서 추가적인 로드가 필요가 없게 된다.
+
+### Full Access to Backend
+클라이언트 사이드에서 접근 불가능하던 데이터베이스에 손쉽게 접근할 수 있다. fs를 활용하거나 혹은 바로 데이터베이스에 접근할 수 있다.
+
+### Automatic Code Splitting
+기존에 code splitting을 위해서는 lazy load 또는 dynamic import를 활용해야 했다. <br/>
+RSC에서는 Client Component를 import하는 경우 자동으로 dynamic import가 적용된다.
+
+### No Client-Server Waterfalls
+Server Component 이전에 데이터를 가져오는 방식은 아래와 같았다.
+
+```js
+function Note(props) {
+  const [note, setNote] = useState(null);
+
+  useEffect(() => {
+    // NOTE: loads *after* rendering, triggering waterfalls in children
+    fetchNote(props.id).then(noteData => {
+      setNote(noteData);
+    });
+  }, [props.id]);
+
+  if (note == null) {
+    return "Loading";
+  } else {
+    return (/* render note here... */);
+  }
+}
+```
+
+부모와 자식 컴포넌트가 모두 위 방식을 사용할 경우, 부모 컴포넌트의 데이터 로딩이 끝나기 전까지 자식 컴포넌트는 데이터를 로드할 수 없게 된다.
+
+```js
+async function Note(props) {
+  // NOTE: loads *during* render, w low-latency data access on the server
+  const note = await db.notes.get(props.id);
+  if (note == null) {
+    // handle missing note
+  }
+  return (/* render note here... */);
+}
+```
+
+Server Component에서는 데이터를 가져오는 로직을 Server Side로 이동시켜 요청에 대한 지연을 줄이고 성능을 개선할 수 있다.
+또한, 필요한 컴포넌트에서 바로 데이터를 사용할 수 있도록 한다.
