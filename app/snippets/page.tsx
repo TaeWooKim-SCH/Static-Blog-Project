@@ -26,7 +26,7 @@ export default async function Snippets(props: PageProps) {
             ))}
           </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-4">
+          <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
             {filteredSnippetsList.map((post, idx) => (
               <SnippetListItem post={post} key={idx} />
             ))}
