@@ -49,6 +49,7 @@ export default async function SeriesPage({ params }: PageProps) {
       <main className="relative pb-16">
         <section>
           <div className="grid grid-cols-1 md:gap-8 md:grid-cols-3">
+            {/*  */}
             <div className="p-10">
               <div className="relative mx-auto h-[336px] w-[240px] select-none rounded-lg bg-neutral-200 px-11 pb-16 pt-12 dark:bg-neutral-800">
                 <div className="absolute inset-y-0 left-4 w-[1px] bg-neutral-50 dark:bg-neutral-700"></div>
@@ -57,7 +58,9 @@ export default async function SeriesPage({ params }: PageProps) {
                 </div>
               </div>
             </div>
+            {/*  */}
             <div className="col-span-2">
+              {/*  */}
               <div className="bg-neutral-200 rounded-lg px-5 py-4 dark:bg-neutral-800">
                 <p className="dark:text-[#dddddd]">{postsData.seriesInfo.description}</p>
                 <div className="flex text-xs mt-1">
@@ -71,12 +74,15 @@ export default async function SeriesPage({ params }: PageProps) {
                   </div>
                 </div>
               </div>
+              {/*  */}
               <section className="mt-16">
                 {postsData.posts.map((post, idx) => (
                   <PostListItem post={post} key={idx} />
                 ))}
               </section>
+              {/*  */}
             </div>
+            {/*  */}
           </div>
         </section>
       </main>

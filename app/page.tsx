@@ -9,6 +9,7 @@ export default async function Home() {
     <Layout>
       <main>
         <section className="flex md:justify-center items-center">
+          {/*  */}
           <Image
             className="w-[200px] h-[200px] rounded-full mr-10 hidden md:block"
             src="/blogImgs/profile.jpg"
@@ -16,6 +17,7 @@ export default async function Home() {
             width={400}
             height={400}
           />
+          {/*  */}
           <div>
             <Title>taewoo</Title>
             <div className="mb-4 text-[1.1rem]">
@@ -30,8 +32,11 @@ export default async function Home() {
               <LinkArrow href="https://taewoo-portfolio.netlify.app" target="_blank">More about me</LinkArrow>
             </div>
           </div>
+          {/*  */}
         </section>
+        {/*  */}
         <FeaturePosts />
+        {/*  */}
       </main>
     </Layout>
   )

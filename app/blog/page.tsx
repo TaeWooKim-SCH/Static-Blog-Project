@@ -7,11 +7,13 @@ import PostListItem from "../conponents/common/PostListItem";
 export default async function Blog() {
   return (
     <Layout>
+      {/*  */}
       <Title>Blog</Title>
-
+      {/*  */}
       <div>
+        {/*  */}
         <div className="text-[#555555] dark:text-[#dddddd]">개발하며 알게된 것들을 기록하는 공간입니다.</div>
-
+        {/*  */}
         <div className="flex items-center space-x-6 py-12 overflow-scroll scrollbar-hide">
           {filteredSeriesBook.map((post, idx) => (
             <div key={idx}>
@@ -24,18 +26,20 @@ export default async function Blog() {
             </div>
           ))}
         </div>
-      
+        {/*  */}
         <div className="mt-16 flex">
           <SubTitle>{'All Posts'}</SubTitle>
           <span className="pt-[0.4rem] lg:pt-3 ml-2 lg:text-lg font-bold dark:text-[#dddddd]">{'('}{AllBlogPost.length}{')'}</span>
         </div>
-
+        {/*  */}
         <div className="grid gap-8 grid-cols-1 mt-12 lg:grid-cols-2">
           {AllBlogPost.map((post, idx) => (
             <PostListItem post={post} key={idx} />
           ))}
         </div>
+        {/*  */}
       </div>
+      {/*  */}
     </Layout>
   );
 }

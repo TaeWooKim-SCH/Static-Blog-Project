@@ -17,7 +17,6 @@ export default function PostListItem({ post }: any) {
               <Tag key={i}>{tag}</Tag>
               ))}
           </div>
-
           <div className="ml-auto flex gap-2 whitespace-nowrap">
             <div className="flex items-center">
               <AiOutlineCalendar className="dark:fill-[#dddddd]" />
