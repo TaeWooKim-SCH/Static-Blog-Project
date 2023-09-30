@@ -3,7 +3,6 @@ import Title from "../conponents/common/Title";
 import { AllBlogPost, filteredSeriesBook } from "../libs/dataset";
 import SubTitle from "../conponents/common/SubTitle";
 import PostListItem from "../conponents/common/PostListItem";
-import Hr from "../conponents/common/Hr";
 
 export default async function Blog() {
   return (
@@ -31,7 +30,7 @@ export default async function Blog() {
           <span className="pt-[0.4rem] lg:pt-3 ml-2 lg:text-lg font-bold dark:text-[#dddddd]">{'('}{AllBlogPost.length}{')'}</span>
         </div>
 
-        <div className="grid gap-8 grid-cols-1 mt-12">
+        <div className="grid gap-8 grid-cols-1 mt-12 md:grid-cols-2">
           {AllBlogPost.map((post, idx) => (
             <PostListItem post={post} key={idx} />
           ))}

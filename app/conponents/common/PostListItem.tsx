@@ -7,10 +7,10 @@ export default function PostListItem({ post }: any) {
   const href = `${post.slug}`;
 
   return (
-    <div className="text-ye group w-full px-6 py-4 transition-all border-b-2 border-neutral-300 group">
+    <div className="text-ye group w-full px-6 py-4 transition-all hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-xl">
       <Link href={href}>
-        <p className="transition-all text-xl font-bold dark:text-[#dddddd] group-hover:drop-shadow-[0_0_10px_#ffee02c5]">{post.title}</p>
-        <p className="transition-all text-[#7a7a7a] mt-1 group-hover:drop-shadow-[0_0_10px_#ffee02c5]">{post.description}</p>
+        <p className="transition-all text-xl font-bold dark:text-[#dddddd]">{post.title}</p>
+        <p className="transition-all text-[#7a7a7a] mt-1">{post.description}</p>
         <div className="mt-2 inline-flex w-full items-start gap-2 text-sm">
           <div className="flex flex-wrap items-center gap-2">
             {post.tags.map((tag: string, i: number) => (
