@@ -1,6 +1,6 @@
 import Layout from "../conponents/layouts/Layout";
 import Title from "../conponents/common/Title";
-import { AllBlogPost, filteredSeriesBook } from "../libs/dataset";
+import { AllBlogPost, filteredSeriesBook, sortedAllBlogPost } from "../libs/dataset";
 import SubTitle from "../conponents/common/SubTitle";
 import PostListItem from "../conponents/common/PostListItem";
 
@@ -33,7 +33,7 @@ export default async function Blog() {
         </div>
         {/*  */}
         <div className="grid gap-8 grid-cols-1 mt-12 lg:grid-cols-2">
-          {AllBlogPost.map((post, idx) => (
+          {sortedAllBlogPost.map((post, idx) => (
             <PostListItem post={post} key={idx} />
           ))}
         </div>

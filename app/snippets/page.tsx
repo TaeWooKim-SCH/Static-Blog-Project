@@ -7,7 +7,7 @@ import { filteredSnippets } from "../libs/module";
 
 interface PageProps {
   params: {},
-  searchParams: { [key: string]: string | undefined}
+  searchParams: { [key: string]: string | undefined }
 }
 
 export default async function Snippets(props: PageProps) {

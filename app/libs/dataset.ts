@@ -15,3 +15,12 @@ export const AllSnippets = allPosts
 export const AllSnippetsName = Array.from(new Set(AllSnippets.map((post) => (
   post._raw.sourceFilePath.split('/')[1]
 ))));
+
+export const sortedAllBlogPost = [...AllBlogPost].sort((a, b) => {
+  if (new Date(a.date) < new Date(b.date)) {
+    return 1;
+  }
+  else {
+    return -1;
+  }
+})
