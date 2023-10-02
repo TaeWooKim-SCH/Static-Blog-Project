@@ -2,7 +2,7 @@ import Layout from "../conponents/layouts/Layout";
 import Title from "../conponents/common/Title";
 import SnippetTag from "../conponents/common/SnippetTag";
 import SnippetListItem from "../conponents/common/SnippetListItem";
-import { AllSnippetsName, sortedAllSnippets } from "../libs/dataset";
+import { AllSnippetsName } from "../libs/dataset";
 import { filteredSnippets } from "../libs/module";
 
 interface PageProps {
@@ -11,7 +11,7 @@ interface PageProps {
 }
 
 export default async function Snippets(props: PageProps) {
-  // const filteredSnippetsList = await filteredSnippets(props.searchParams.key);
+  const filteredSnippetsList = await filteredSnippets(props.searchParams.key);
 
   return (
     <Layout>
@@ -30,7 +30,7 @@ export default async function Snippets(props: PageProps) {
         </div>
         {/*  */}
         <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {sortedAllSnippets.map((post, idx) => (
+          {filteredSnippetsList.map((post, idx) => (
             <SnippetListItem post={post} key={idx} />
           ))}
         </div>
