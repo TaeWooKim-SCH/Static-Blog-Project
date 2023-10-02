@@ -1,0 +1,67 @@
+---
+title: '[JavaScript] Throttle과 Debounce'
+description: 'JavaScript throttle과 debounce에 대해 알아봅시다.'
+tags:
+  - javascript
+  - throttle
+  - debounce
+date: 2023-10-02
+---
+
+## Throttle과 Debounce를 이용한 이벤트 처리
+`throttle`과 `debounce`는 과도한 이벤트 발생으로 인한 성능 저하를 방지하는 방법이다.
+이 둘은 일정 시간을 두고 이벤트를 발생시킨다는 공통된 목표를 갖고 있지만, 서로 동작 방식이 다르다.
+
+## Throttle의 동작 방식과 구현
+### Throttle 동작 예시
+Throttle은 같은 이벤트가 반복되게 발생하는 경우 일정 시간 간격으로 콜백 함수를 실행되도록 하는 것이다.
+(즉, 한번 콜백 함수가 한번 실행되면 같은 이벤트가 발생되더라도 일정 시간동안은 해당 콜백함수를 실행시키지 않게 해주는 것)
+- 한마디로 일정 시간동안 이벤트가 한 번만 발생되도록 한다.
+
+![231002-155155](/posts/13-throttle-and-debounce/231002-155155.png)
+
+이벤트가 꾸준히 발생하는 상황에서 일정 시간 간격으로 이벤트를 발생시키고 싶을 땐 Debounce대신 Throttle을 사용하면 된다.
+
+### Throttle 구현하기
+```js
+function throttle(callbackFn, time) {
+  let wating = false;
+
+  return (...args) => {
+    if (!wating) {
+      callbackFn.apply(this, args);
+      wating = true;
+
+      setTimeout(() => (wating = false), time);
+    }
+  }
+}
+```
+
+
+## Debounce의 동작 방식과 구현
+### Debounce의 동작 예시
+Debounce는 같은 이벤트가 반복되게 발생하는 경우 반복적으로 발생하던 이벤트가 일정 시간동안 다시
+발생하지 않으면(즉, 반복적으로 발생하던 이벤트가 끝나면) 콜백 함수를 실행되도록 하는 것.
+- 한마디로 이벤트를 그룹화하여 하나의 이벤트만 호출되도록 한다.
+
+![231002-155928](/posts/13-throttle-and-debounce/231002-155928.png)
+
+위 그림처럼 Debounce는 일정 시간동안 함수 호출이 일어나지 않을 때 가장 마지막 이벤트를 발생시킨다.
+
+### Debounce 구현하기
+```js
+function debounce(callbackFn, time) {
+  let timer = null;
+
+  return (...args) => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+      callbackFn.apply(this, args);
+    }, time)
+  }
+}
+```

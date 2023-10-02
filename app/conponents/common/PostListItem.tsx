@@ -1,4 +1,7 @@
+'use client'
+
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 import { AiOutlineCalendar } from 'react-icons/ai';
 import Tag from "./Tag";
@@ -7,7 +10,12 @@ export default function PostListItem({ post }: any) {
   const href = `${post.slug}`;
 
   return (
-    <div className="text-ye group w-full px-6 py-4 transition-all hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-xl">
+    <motion.div
+      className="text-ye group w-full px-6 py-4 transition-all hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-xl"
+      initial={animate.initial}
+      animate={animate.animate}
+      exit={animate.exit}
+    >
       <Link href={href}>
         <p className="transition-all text-xl font-bold dark:text-[#dddddd]">{post.title}</p>
         <p className="transition-all text-[#7a7a7a] mt-1">{post.description}</p>
@@ -25,6 +33,22 @@ export default function PostListItem({ post }: any) {
           </div>
         </div>
       </Link>
-    </div>
+    </motion.div>
   );
+}
+
+const animate = {
+  initial :{ 
+      transform : `translateY(50px)`,
+      opacity : 0,
+      transition: `all 2s ease`
+  },
+  animate : {
+      transform : 'translateY(0px)',
+      opacity: 1,
+  },
+  exit : {
+      transform : `translateY(50px)`,
+      opacity: 0,
+  }
 }

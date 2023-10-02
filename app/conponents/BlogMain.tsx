@@ -1,5 +1,7 @@
 'use client'
 
+import { motion } from "framer-motion";
+
 import { filteredSeriesBook, sortedAllBlogPost } from "../libs/dataset";
 import SubTitle from "./common/SubTitle";
 import SearchBarInput from "./common/SearchBarInput";
@@ -10,7 +12,6 @@ export default function BlogMain() {
   const { searchValue, searchHandler } = useSearch();
 
   const filteredBlogPost = sortedAllBlogPost.filter((post) => post.title.includes(searchValue));
-  console.log(filteredBlogPost);
 
   return (
     <div>
@@ -20,7 +21,9 @@ export default function BlogMain() {
         <SearchBarInput onChange={searchHandler} />
       </div>
 
-      <div className="flex items-center space-x-6 py-12 overflow-scroll scrollbar-hide">
+      <div
+        className="flex items-center space-x-6 py-12 overflow-scroll scrollbar-hide"
+      >
         {filteredSeriesBook.map((post, idx) => (
           <div key={idx}>
             <a href={post.slug}>
@@ -45,4 +48,47 @@ export default function BlogMain() {
       </div>
     </div>
   );
+}
+
+// export const defaultEasing = [0.6, -0.05, 0.01, 0.99];
+
+// export const fadeInSlideToLeft = {
+//   initial: {
+//     opacity: 0,
+//     x: 30,
+//     transition: { duration: 0.6, ease: defaultEasing },
+//     willChange: 'opacity, transform',
+//   },
+//   animate: {
+//     opacity: 1,
+//     x: 0,
+//     transition: { duration: 0.6, ease: defaultEasing },
+//     willChange: 'opacity, transform',
+//   },
+//   exit: {
+//     opacity: 0,
+//     x: -30,
+//     transition: { duration: 0.6, ease: defaultEasing },
+//     willChange: 'opacity, transform',
+//   },
+// };
+
+// export const staggerOne: Variants = {
+//   animate: { transition: { staggerChildren: 0.1 } },
+// };
+
+const animate = {
+  initial :{ 
+      transform : `translateY(50px)`,
+      opacity : 0,
+      transition: `all 2s ease`
+  },
+  animate : {
+      transform : 'translateY(0px)',
+      opacity: 1,
+  },
+  exit : {
+      transform : `translateY(50px)`,
+      opacity: 0,
+  }
 }
