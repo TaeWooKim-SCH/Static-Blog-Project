@@ -1,0 +1,167 @@
+---
+title: '[Next.js] Next.js Compiler'
+description: 'Next.js의 컴파일러에 대해 알아봅시다.'
+tags:
+  - next.js
+  - swc
+  - compiler
+date: 2023-10-03
+---
+
+Next.js 컴파일러는 Rust로 작성된 SWC를 사용한다.
+이 컴파일러는 Babel보다 17배 빠르며, Next.js 버전 12부터 활성화되어 있다.
+기존에 Babel 설정이 되어 있거나 지원되지 않는 기능을 사용할 경우엔 Next.js 컴파일러를 옵트아웃하고 Babel을 계속 사용한다.
+
+## 왜 SWC(Speedy Web Compiler)를 사용하나?
+SWC란 Speedy Web Compiler의 약자로 Rust라는 언어로 제작된 매우 빠른 JS 컴파일러이고, Babel의 대체제라고 한다.
+
+SWC는 컴파일러지만 웹팩과 같은 JS의 번들러 기능도 제공한다.
+
+따라서 그냥 컴파일러가 아닌 Rust 기반의 플랫폼이다.
+
+Next.js에서는 몇 가지 이유로 SWC를 컴파일러를 사용하기로 했다.
+
+### Extensibility
+SWC는 라이브러리를 가져오거나 디자인 제약을 해결할 필요 없이 Next.js 내에서 생성할 수 있다.
+
+### Performance
+SWC로 전환한 후 Next.js에서 최대 3배 빠른 새로고침과 최대 5배 빠른 빌드를 할 수 있으며 현재도 최적화가 진행중이다.
+
+### WebAssembly
+가능한 모든 플랫폼을 지원하고 어디서나 Next.js로 개발을 수행하는 데 있어 Rust의 WASM 지원이 필수적이다.
+
+### Community
+Rust 커뮤니티와 에코 시스템은 계속 성장하고 있다.
+
+
+## 지원되는 기능
+### Styled Components
+Next.js 컴파일러에서 `babel-plugin-styled-components`를 여러 환경에서 실행될 수 있도록 하기 위한 방법이 있다.
+
+첫 번째, Next.js를 최신 버전으로 업데이트한다. 그 후 `next.config.js` 파일을 연다.
+
+```js
+module.exports = {
+  compiler: {
+    // see https://styled-components.com/docs/tooling#babel-plugin for more info on the options.
+    styledComponents: boolean | {
+      // Enabled by default in development, disabled in production to reduce file size,
+      // setting this will override the default for all environments.
+      displayName?: boolean,
+      // Enabled by default.
+      ssr?: boolean,
+      // Enabled by default.
+      fileName?: boolean,
+      // Empty by default.
+      topLevelImportPaths?: string[],
+      // Defaults to ["index"].
+      meaninglessFileNames?: string[],
+      // Enabled by default.
+      cssProp?: boolean,
+      // Empty by default.
+      namespace?: string,
+      // Not supported yet.
+      minify?: boolean,
+      // Not supported yet.
+      transpileTemplateLiterals?: boolean,
+      // Not supported yet.
+      pure?: boolean,
+    },
+  },
+}
+```
+
+minify, transpileTemplateLiterals, pure는 아직 구현되지 않았다.
+진행 상황은 <a href="https://github.com/vercel/next.js/issues/30802" target="_blank">여기서</a> 확인할 수 있다.
+
+Next.js에서 스타일 컴포넌트를 사용하기 위한 주요 사항은 ssr 및 displayName 변경이다.
+
+### Jest
+Next.js 컴파일러는 테스트를 트랜스파일링하고 다음을 포함해 Next.js와 함께 Jest 구성을 간소화한다.
+
+- .css, .module.css(및 .scss 변형) 및 이미지 가져오기를 자동으로 가짜 객체를 만들어 사용한다.(Mock)
+- SWC를 사용하여 `transform` 자동 설정
+- `.env`(및 모든 변수)를 `process.env`에 로드
+- 테스트 확인 및 변환에서 node_modules 무시
+- 실험적 SWC 트랜스폼을 활성화하는 플래그를 위해 next.config.js를 로드
+
+먼저, Next.js를 최신 버전으로 업데이트하고 jest.config.js 파일을 연다.
+
+```js
+const nextJest = require('next/jest')
+
+// Providing the path to your Next.js app which will enable loading next.config.js and .env files
+const createJestConfig = nextJest({ dir: './' })
+
+// Any custom config you want to pass to Jest
+const customJestConfig = {
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+}
+
+// createJestConfig is exported in this way to ensure that next/jest can load the Next.js configuration, which is async
+module.exports = createJestConfig(customJestConfig)
+```
+
+### Relay
+```js
+module.exports = {
+  compiler: {
+    relay: {
+      // This should match relay.config.js
+      src: './',
+      artifactDirectory: './__generated__',
+      language: 'typescript',
+      eagerEsModules: false,
+    },
+  },
+}
+```
+
+### Remove React Properties
+JSX 속성을 제거할 수 있다. 이는 테스팅에서 자주 사용된다. `babel-plugin-react-remove-properties`과 비슷하다.
+
+기본 정규식 `^data-test`을 가진 속성을 제거한다.
+
+```js
+module.exports = {
+  compiler: {
+    reactRemoveProperties: true,
+  },
+}
+```
+
+사용자 지정 속성도 제거한다.
+
+```js
+module.exports = {
+  compiler: {
+    // The regexes defined here are processed in Rust so the syntax is different from
+    // JavaScript `RegExp`s. See https://docs.rs/regex.
+    reactRemoveProperties: { properties: ['^data-custom$'] },
+  },
+}
+```
+
+### Remove Console
+이 트랜스폼을 사용하면 애플리케이션 코드에서 모든 콘솔을 호출하는 부분을 제거할 수 있다.
+`babel-plugin-transform-remove-console`과 유사하다.
+
+```js
+module.exports = {
+  compiler: {
+    removeConsole: true,
+  },
+}
+```
+
+다음 코드는 오류를 제외한 모든 콘솔을 제거하는 설정이다.
+
+```js
+module.exports = {
+  compiler: {
+    removeConsole: {
+      exclude: ['error'],
+    },
+  },
+}
+```
