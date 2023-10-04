@@ -165,3 +165,16 @@ module.exports = {
   },
 }
 ```
+
+### Minification
+Next.js 13버전에서는 경량화 작업을 기본적으로 SWC를 이용한다.
+
+만약 SWC를 사용하지 않고 기존의 Terser를 사용하고 싶다면 swcMinify 설정을 false로 설정하면 된다.
+
+
+```js
+// next.config.js
+module.exports = {
+  swcMinify: false,
+}
+```
