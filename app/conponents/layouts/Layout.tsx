@@ -1,4 +1,4 @@
-import HeaderNav from "./HeaderNav"
+import HeaderNav from "./HeaderNav";
 import Hr from "../common/Hr";
 import AuthorContacts from "../common/AuthorContacts";
 
