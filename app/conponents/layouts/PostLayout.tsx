@@ -14,12 +14,14 @@ import AuthorContacts from '../common/AuthorContacts';
 import { HiChevronRight } from 'react-icons/hi';
 import { Post } from '@/.contentlayer/generated';
 import SubTitle from '../common/SubTitle';
+import SEO from '../SEO';
 
 export default function PostLayout({ post }: { post: Post }) {
   const { scrollYProgress } = useScroll();
 
   return (
     <Layout>
+      <SEO title={post.title} description={post.description} />
       {/* <motion.div
         className="w-full h-2 fixed top-0 right-0 bg-red-500 z-50"
         style={{ scaleX: scrollYProgress }}
