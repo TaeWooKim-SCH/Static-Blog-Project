@@ -4,6 +4,7 @@ import SnippetTag from "../conponents/common/SnippetTag";
 import SnippetListItem from "../conponents/common/SnippetListItem";
 import { AllSnippetsName } from "../libs/dataset";
 import { filteredSnippets } from "../libs/module";
+import SEO from "../conponents/SEO";
 
 interface PageProps {
   params: {},
@@ -15,6 +16,7 @@ export default async function Snippets(props: PageProps) {
 
   return (
     <Layout>
+      <SEO title="Snippets - taewoo" description="Welcome to taewoo snippets" />
       {/*  */}
       <Title>Snippets</Title>
       {/*  */}
@@ -36,7 +38,6 @@ export default async function Snippets(props: PageProps) {
         </div>
         {/*  */}
       </div>
-      {/*  */}
     </Layout>
   );
 }
