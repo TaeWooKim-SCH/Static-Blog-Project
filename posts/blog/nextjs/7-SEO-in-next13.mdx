@@ -1,0 +1,70 @@
+---
+title: '[Next.js] Next.js 13버전에서 SEO하기'
+description: '달라진 Next.js 13버전의 SEO에 대해 알아봅시다.'
+tags:
+  - next.js
+  - seo
+  - metadata
+date: 2023-10-10
+---
+
+SEO를 하려고 Head 컴포넌트를 불러와서 메타 태그들을 사용했더니 적용이 되지 않았다.....
+
+그래서 구글을 뒤져봤더니 아무곳도 나오지 않았다. Next 13버전은 이게 너무 불편하다. 정보가 너무 없다 흑흑
+
+결국 나는 공식문서를 뒤지기 시작했다. 공식문서를 뒤지다 보니 이게 뭔가 Head 컴포넌트를 app 디렉터리에서는 사용하지 않는다고 한다.
+
+Metadata라는 것을 불러와서 사용한다....
+
+
+## Static Metadata
+정적으로 metadata를 설정하는 방법이다.
+```js
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '...',
+  description: '...',
+}
+
+export default function Page() {}
+```
+정적으로 설정하는 건 간단하다. 하지만 내가 알고 싶던 것은 동적 설정이다...
+
+
+## Dynamic Metadata
+와 이거 찾느라 미치는 줄 알았다 드디어 찾아서 너무 행복하다.
+동적으로 metadata를 설정하기 위해서는 타입스크립트를 사용할 땐 타입 설정하는 것과 `generateMetadata`라는 함수를 생성해서 커스터마이징을 해줘야 한다.
+아래 코드처럼 하면 된다.
+
+```js
+import type { Metadata, ResolvingMetadata } from 'next'
+
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const id = params.id
+
+  // fetch data
+  const product = await fetch(`https://.../${id}`).then((res) => res.json())
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || []
+
+  return {
+    title: product.title,
+    openGraph: {
+      images: ['/some-specific-page-image.jpg', ...previousImages],
+    },
+  }
+}
+
+export default function Page({ params, searchParams }: Props) {}
+```
