@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 
 import ThemeWrap from './conponents/common/ThemeWrap'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: "taewoo blog",
