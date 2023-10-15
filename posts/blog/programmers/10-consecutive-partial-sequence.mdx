@@ -1,0 +1,87 @@
+---
+title: '[Lv.2] 연속 부분 수열 합의 개수'
+description: '프로그래머스 레벨 2 연속 부분 수열 합의 개수 문제를 풀어봅시다.'
+tags:
+  - 'circular sequence'
+date: '2023-10-15'
+---
+
+## 문제 설명
+철호는 수열을 가지고 놀기 좋아합니다.
+어느 날 철호는 어떤 자연수로 이루어진 원형 수열의
+연속하는 부분 수열의 합으로 만들 수 있는 수가 모두 몇 가지인지 알아보고 싶어졌습니다.
+원형 수열이란 일반적인 수열에서 처음과 끝이 연결된 형태의 수열을 말합니다.
+예를 들어 수열 [7, 9, 1, 1, 4] 로 원형 수열을 만들면 다음과 같습니다.
+
+![231015-173047](/posts/10-consecutive-partial-sequence/231015-173047.png)
+
+원형 수열은 처음과 끝이 연결되어 끊기는 부분이 없기 때문에 연속하는 부분 수열도 일반적인 수열보다 많아집니다.
+원형 수열의 모든 원소 elements가 순서대로 주어질 때,
+원형 수열의 연속 부분 수열 합으로 만들 수 있는 수의 개수를 return 하도록 solution 함수를 완성해주세요.
+
+
+## 제한 사항
+- 3 ≤ elements의 길이 ≤ 1,000
+- 1 ≤ elements의 원소 ≤ 1,000
+
+
+## 풀이
+먼저 원형 수열을 탐색하기 위해서는 배열 2개를 이어 붙이는 방법이 있다.
+이것을 먼저 생각하고 풀이로 들어간다.
+
+### 바로 더하기식 풀이
+1. 집합을 생성한다.
+2. 2중 반복으로 시작한다.
+3. 첫 번째 반복문에서 변수를 생성한다.
+4. 두 번째 반복문에서 위에서 만든 변수에 원형수열의 요소를 더해준다.
+5. 첫 번째에 만든 집합에도 추가한다.
+
+### 배열의 슬라이싱을 이용한 풀이(비효율적)
+1. 집합을 생성한다.
+2. 2중 반복으로 시작한다. 단, 첫 번째 반복은 1부터 시작한다.
+3. 첫 번째 반복문은 연속하는 부분의 길이이다.
+4. 두 번째 반복은 시작점이다.
+5. 두 번째 반복문에서 원형수열의 배열을 슬라이싱한다.
+6. 슬라이싱의 첫 번째 매개변수는 시작점이다.
+7. 슬라이싱의 두 번째 매개변수는 끝점이므로 시작점에 첫 번째 반복문 변수만큼 더해준다.
+
+
+## 통과 코드
+### 바로 더하기식 코드
+```js
+function solution(elements) {
+  var sumSet = new Set();
+  var circleArray = [...elements, ...elements];
+  
+  for (var i = 0; i < elements.length; i++) {
+    var sum = 0;
+    for (var j = 0; j < elements.length; j++) {
+      sum += circleArray[i + j];
+      sumSet.add(sum);
+    }
+  }
+
+  return sumSet.size;
+}
+```
+
+### 배열의 슬라이싱을 이용한 코드
+```js
+function solution(elements) {
+  // 원형 수열의 연속하는 부분 수열의 합으로 만들 수 있는 수가 모두 몇 가지인지
+  // 원형 수열: 일반적인 수열에서 처음과 끝이 연결된 형태의 수열
+  // [7, 9, 1, 1, 4] -> 18
+  var sumSet = new Set();
+  var circleArray = [...elements, ...elements];
+  
+  for (var i = 1; i < elements.length + 1; i++) { // 더할 수 있는 가지수
+    for (var j = 0; j < elements.length; j++) {
+      var sumArray = circleArray.slice(j, j + i);
+      var sum = sumArray.reduce((acu, cur) => acu += cur);
+      sumSet.add(sum);
+    }
+  }
+
+  return sumSet.size;
+}
+```
