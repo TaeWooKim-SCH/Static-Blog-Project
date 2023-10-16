@@ -21,7 +21,8 @@ export async function generateMetadata({ params }: PageProps) {
   const post = getSeriesSign(params.slug);
 
   return {
-    title: post.title
+    title: post.title,
+    description: post.description
   }
 }
 

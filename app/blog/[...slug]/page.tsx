@@ -14,6 +14,15 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }: PageProps) {
+  const post = await getDocFromParams(params.slug);
+
+  return {
+    title: post.title,
+    description: post.description
+  }
+}
+
 export default async function DetailPage({ params }: PageProps) {
   const doc = await getDocFromParams(params.slug);
 
