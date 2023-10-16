@@ -6,7 +6,7 @@ import SEO from "../conponents/SEO";
 export default async function Blog() {
   return (
     <Layout>
-      <SEO title="Blog - taewoo" description="Welcome to taewoo blog" />
+      {/* <SEO title="Blog - taewoo" description="Welcome to taewoo blog" /> */}
       {/*  */}
       <Title>Blog</Title>
       {/*  */}

@@ -21,7 +21,7 @@ export default function PostLayout({ post }: { post: Post }) {
 
   return (
     <Layout>
-      <SEO title={post.title} description={post.description} />
+      {/* <SEO title={post.title} description={post.description} /> */}
       {/* <motion.div
         className="w-full h-2 fixed top-0 right-0 bg-red-500 z-50"
         style={{ scaleX: scrollYProgress }}

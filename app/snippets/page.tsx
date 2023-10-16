@@ -16,7 +16,7 @@ export default async function Snippets(props: PageProps) {
 
   return (
     <Layout>
-      <SEO title="Snippets - taewoo" description="Welcome to taewoo snippets" />
+      {/* <SEO title="Snippets - taewoo" description="Welcome to taewoo snippets" /> */}
       {/*  */}
       <Title>Snippets</Title>
       {/*  */}
