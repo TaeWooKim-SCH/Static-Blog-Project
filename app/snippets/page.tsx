@@ -1,10 +1,16 @@
+import { Metadata } from "next";
+
 import Layout from "../conponents/layouts/Layout";
 import Title from "../conponents/common/Title";
 import SnippetTag from "../conponents/common/SnippetTag";
 import SnippetListItem from "../conponents/common/SnippetListItem";
 import { AllSnippetsName } from "../libs/dataset";
 import { filteredSnippets } from "../libs/module";
-import SEO from "../conponents/SEO";
+
+export const metadata: Metadata = {
+  title: 'Snippets - taewoo',
+  description: '저만의 코드들의 모음이 담겨있는 곳에 오신 것을 환영합니다.'
+}
 
 interface PageProps {
   params: {},
@@ -16,12 +22,9 @@ export default async function Snippets(props: PageProps) {
 
   return (
     <Layout>
-      {/* <SEO title="Snippets - taewoo" description="Welcome to taewoo snippets" /> */}
-      {/*  */}
       <Title>Snippets</Title>
       {/*  */}
       <div>
-        {/*  */}
         <div className="text-[#555555] dark:text-[#dddddd]">개발하며 사용된 실제 코드 조각들입니다.</div>
         <div className="text-[#555555] dark:text-[#dddddd]">태그별로 각종 꿀팁들이 들어있을 수 있습니다. 😎</div>
         {/*  */}
@@ -36,7 +39,6 @@ export default async function Snippets(props: PageProps) {
             <SnippetListItem post={post} key={idx} />
           ))}
         </div>
-        {/*  */}
       </div>
     </Layout>
   );
