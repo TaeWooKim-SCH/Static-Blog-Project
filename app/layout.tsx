@@ -11,7 +11,8 @@ export const metadata: Metadata = {
   description: 'Welcome to taewoo blog',
   openGraph: {
     title: 'taewoo blog',
-    description: 'Welcome to taewoo blog'
+    description: 'Welcome to taewoo blog',
+    images: './favicon.ico'
   }
 }
 
@@ -22,9 +23,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* <head>
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-      </head> */}
       <body className={`${inter.className} bg-[#F7F7F7] dark:bg-[#141414] transition-all`}>
         <ThemeWrap>{children}</ThemeWrap>
       </body>
