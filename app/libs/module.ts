@@ -22,3 +22,9 @@ export async function filteredSnippets(key: string ='all') {
 
   return sortedAllSnippets.filter((post) => post.slugAsParams.split('/')[0] === key);
 }
+
+export function getSeriesSign(name: string) {
+  return (
+    allPosts.filter((post) => post._raw.sourceFilePath.includes('index.mdx') && post.slug.split('/')[2] === name)[0]
+  )
+}

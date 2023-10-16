@@ -5,6 +5,7 @@ import { allPosts } from "@/.contentlayer/generated";
 import Layout from "@/app/conponents/layouts/Layout";
 import PostListItem from "@/app/conponents/common/PostListItem";
 import { AllSeriesName } from "@/app/libs/dataset";
+import { getSeriesSign } from "@/app/libs/module";
 
 interface PageProps {
   params: {
@@ -14,6 +15,14 @@ interface PageProps {
 
 export async function generateStaticParams() {
   return AllSeriesName.map((name) => ({slug: name}));
+}
+
+export async function generateMetadata({ params }: PageProps) {
+  const post = getSeriesSign(params.slug);
+
+  return {
+    title: post.title
+  }
 }
 
 async function getSeriesPost(slug: string) {
