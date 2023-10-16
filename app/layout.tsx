@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'taewoo blog',
     description: 'Welcome to taewoo blog',
-    images: './favicon.ico'
+    images: '/logo.png'
   }
 }
 
