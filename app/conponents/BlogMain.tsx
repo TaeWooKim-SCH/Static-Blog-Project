@@ -41,7 +41,7 @@ export default function BlogMain() {
         <span className="pt-3 ml-2 text-lg font-bold dark:text-[#dddddd]">{'('}{filteredBlogPost.length}{')'}</span>
       </div>
 
-      <div className="grid gap-8 grid-cols-1 md:grid-cols-2 mt-12">
+      <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 mt-12">
         {filteredBlogPost.map((post, idx) => (
           <PostListItem post={post} key={idx} />
         ))}
