@@ -1,0 +1,76 @@
+---
+title: '[Lv.2] 할인 행사'
+description: '프로그래머스 레벨 2 할인 행사 문제를 풀어봅시다.'
+tags:
+  - 'Map'
+date: '2023-10-17'
+---
+
+## 문제 설명
+정현이가 원하는 제품을 나타내는 문자열 배열 `want`와
+정현이가 원하는 제품의 수량을 나타내는 정수 배열 `number`,
+XYZ 마트에서 할인하는 제품을 나타내는 문자열 배열 `discount`가 주어졌을 때,
+회원등록시 정현이가 원하는 제품을 모두 할인 받을 수 있는 회원등록 날짜의 총 일수를 return 하는 solution 함수를 완성하시오.
+가능한 날이 없으면 0을 return 합니다.
+
+
+## 제한 사항
+- 1 ≤ want의 길이 = number의 길이 ≤ 10
+  - 1 ≤ number의 원소 ≤ 10
+  - number[i]는 want[i]의 수량을 의미하며, number의 원소의 합은 10입니다.
+- 10 ≤ discount의 길이 ≤ 100,000
+- want와 discount의 원소들은 알파벳 소문자로 이루어진 문자열입니다.
+  - 1 ≤ want의 원소의 길이, discount의 원소의 길이 ≤ 12
+
+## 풀이
+1. discount 전체를 순회할 필요가 없고 -9만큼만 순회하면 된다.
+2. discount - 9만큼 반복하며 discount에서 길이가 10만큼 계속 슬라이싱한다.
+3. 10일간 할인할 목록을 담을 Map을 만들고 데이터를 담아준다.
+4. want 배열의 길이만큼 순회하며 제품이 없거나 수량이 부족하면 카운팅하지 않는다.
+
+
+## 통과 코드
+### Map을 이용한 코드
+```js
+function solution(want, number, discount) {
+  var answer = 0;
+
+  for (var i = 0; i < discount.length - 9; i++) {
+    var tenDay = discount.slice(i, i + 10); // 10일 만큼 슬라이싱
+    var discountMap = new Map(); // 10일간 할인할 제품과 개수를 넣을 맵
+    for (var j = 0; j < tenDay.length; j++) {
+      discountMap.get(tenDay[j]) ? discountMap.set(tenDay[j], discountMap.get(tenDay[j]) + 1) : discountMap.set(tenDay[j], 1);
+    }
+    for (var k = 0; k < want.length; k++) {
+      // 10일간 할인할 맵에 제품이 존재하지 않거나 개수가 더 적으면 탈락
+      if (!discountMap.get(want[k]) || number[k] > discountMap.get(want[k])) {
+        break;
+      }
+      // 마지막 반복까지 무사히 통과했으면 카운팅
+      if (k === want.length - 1) answer++;
+    }
+  }
+  
+  return answer;
+}
+```
+
+### filter를 이용한 코드
+```js
+function solution(want, number, discount) {
+  let count = 0;
+  for (let i = 0; i < discount.length - 9; i++) {
+    const slice = discount.slice(i, i+10);
+
+    let flag = true;
+    for (let j = 0; j < want.length; j++) {
+      if (slice.filter(item => item === want[j]).length !== number[j]) {
+        flag = false;
+        break;
+      }
+    }
+    if (flag) count += 1;
+  }
+  return count;
+}
+```
