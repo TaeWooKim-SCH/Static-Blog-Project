@@ -12,12 +12,9 @@ export const metadata: Metadata = {
 export default async function Blog() {
   return (
     <Layout>
-      {/* <SEO title="Blog - taewoo" description="Welcome to taewoo blog" /> */}
-      {/*  */}
       <Title>Blog</Title>
       {/*  */}
       <BlogMain />
-      {/*  */}
     </Layout>
   );
 }
