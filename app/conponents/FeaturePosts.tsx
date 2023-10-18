@@ -44,10 +44,10 @@ export default function FeaturePosts() {
           exit={animate.exit}
         >
           <PostItem
-            href="/blog/nextjs/1-nextblog"
+            href="/blog/nextjs/3-rsc"
             imgUrl={unsplashImgList[0]}
-            title="[Next.js] Next 13버전으로 블로그 만들기"
-            date="2023.09.16"
+            title="[Next.js] rsc란 무엇일까?"
+            date="2023.09.28"
           />
           <PostItem
             href="/blog/nextjs/2-deployError"
