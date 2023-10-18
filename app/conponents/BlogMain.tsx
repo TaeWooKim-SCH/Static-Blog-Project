@@ -41,41 +41,19 @@ export default function BlogMain() {
         <span className="pt-3 ml-2 text-lg font-bold dark:text-[#dddddd]">{'('}{filteredBlogPost.length}{')'}</span>
       </div>
 
-      <div className="grid gap-8 grid-cols-1 lg:grid-cols-2 mt-12">
+      <motion.div
+        className="grid gap-8 grid-cols-1 lg:grid-cols-2 mt-12"
+        initial={animate.initial}
+        animate={animate.animate}
+        exit={animate.exit}
+      >
         {filteredBlogPost.map((post, idx) => (
           <PostListItem post={post} key={idx} />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
-
-// export const defaultEasing = [0.6, -0.05, 0.01, 0.99];
-
-// export const fadeInSlideToLeft = {
-//   initial: {
-//     opacity: 0,
-//     x: 30,
-//     transition: { duration: 0.6, ease: defaultEasing },
-//     willChange: 'opacity, transform',
-//   },
-//   animate: {
-//     opacity: 1,
-//     x: 0,
-//     transition: { duration: 0.6, ease: defaultEasing },
-//     willChange: 'opacity, transform',
-//   },
-//   exit: {
-//     opacity: 0,
-//     x: -30,
-//     transition: { duration: 0.6, ease: defaultEasing },
-//     willChange: 'opacity, transform',
-//   },
-// };
-
-// export const staggerOne: Variants = {
-//   animate: { transition: { staggerChildren: 0.1 } },
-// };
 
 const animate = {
   initial :{ 
