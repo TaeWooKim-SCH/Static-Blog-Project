@@ -1,0 +1,70 @@
+---
+title: '[Lv.2] 행렬의 곱셈'
+description: '프로그래머스 레벨 2 행렬의 곱셈 문제를 풀어봅시다.'
+tags:
+  - 'matrix'
+date: '2023-10-20'
+---
+
+## 문제 설명
+2차원 행렬 arr1과 arr2를 입력받아, arr1에 arr2를 곱한 결과를 반환하는 함수, solution을 완성해주세요.
+
+
+## 제한 사항
+행렬 arr1, arr2의 행과 열의 길이는 2 이상 100 이하입니다.
+행렬 arr1, arr2의 원소는 -10 이상 20 이하인 자연수입니다.
+곱할 수 있는 배열만 주어집니다.
+
+
+## 풀이
+이 문제를 풀기 위해서는 기본적으로 행렬의 곱셈에 대해 알아야 한다.
+
+두 행렬 A, B가 있다고 가정했을 때 행렬의 곱이 가능한 조건은 A의 열과 B의 행의 수가 같아야 한다.
+그리고 곱한 행렬의 행은 A의 행이고, 열은 B의 열과 같다.
+
+두 행렬을 곱하는 방법은 예를 들어 곱한 행렬의 1행 1열은 A의 1행과 B의 1열을 각각 자리에 맞게 곱하고 더한 값과 같다.
+
+추가로 행렬의 곱은 뒤에 행렬을 전치해놓고 풀면 쉽다.
+
+이제 이것을 코드로 구현하면 된다.
+
+나는 처음에 뒤에 행렬을 전치시키고 나서 풀었다.
+
+예를 들어 arr2가 [[1, 2, 3, 4], [5, 6, 7, 8]]일 때 이 행렬의 전치행렬은
+[[1, 5], [2, 6], [3, 7], [4, 8]]과 같다. 이 배열의 각 요소의 배열을 열이라고 생각하면 된다.
+
+이제 arr1과 전치행렬을 순회하며 풀면 끝이다.
+
+
+## 통과 코드
+```js
+function solution(arr1, arr2) {
+  var answer = [];
+  // 매직넘버를 위한 결과 행렬의 행과 열의 수를 생성
+  var rowLength = arr1.length;
+  var colLength = arr2[0].length;
+  var cols = [];
+  
+  for (var i = 0; i < arr2[0].length; i++) {
+    var row = [];
+    for (var j = 0; j < arr2.length; j++) {
+      row.push(arr2[j][i]);
+    }
+    cols.push(row);
+  }
+  
+  for (var i = 0; i < rowLength; i++) {
+    var row = [];
+    for (var j = 0; j < colLength; j++) {
+      var element = 0;
+      for (var k = 0; k < arr1[i].length; k++) {
+        element += arr1[i][k] * cols[j][k];
+      }
+      row.push(element);
+    }
+    answer.push(row);
+  }
+  
+  return answer;
+}
+```
