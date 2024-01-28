@@ -11,9 +11,8 @@ import useSearch from "../libs/useSearch";
 
 export default function BlogMain() {
   const { searchValue, searchHandler } = useSearch();
-
   const filteredBlogPost = sortedAllBlogPost.filter((post) => post.title.includes(searchValue));
-  console.log(filteredSeriesBook);
+
   return (
     <div>
       <div className="text-[#555555] dark:text-[#dddddd]">개발하며 알게된 것들을 기록하는 공간입니다.</div>
